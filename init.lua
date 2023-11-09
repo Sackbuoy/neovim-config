@@ -62,6 +62,25 @@ vim.keymap.set('n', 'gr', ':Telescope lsp_references<CR>')
 vim.keymap.set('n', 'gi', ':Telescope lsp_implementations<CR>')
 vim.keymap.set('n', 'gd', ':Telescope lsp_definitions<CR>')
 
--- rust vim
+-- rust.vim
 vim.g.rust_clip_command = 'pbcopy' -- for mac
 -- vim.g.rust_clip_command = 'xclip -selection clipboard' --for linux
+
+-- vim-go
+vim.g.go_gopls_enabled = 0 -- im doing gopls myself so i get universal keybinds
+
+-- function for executing a command that rewrites the buffer,
+-- and then restores the cursor to its original location before the exec
+_G.retain_window_exec = function(args)
+  local view = vim.fn.winsaveview()
+  vim.cmd.execute(arg)
+  vim.fn.winrestview(view)
+end
+
+-- autocmd for running my formatter on go files
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*.go',
+  command = "lua retain_window_exec('silent %!myfmt')",
+})
+
+  

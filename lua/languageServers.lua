@@ -43,7 +43,7 @@ local global_keybinds = {
 
 local servers = {
   'golangci_lint_ls',
-  -- 'gopls', -- handled by vim-go
+  'gopls',
   'rust_analyzer',
   'helm_ls',
   'tsserver',

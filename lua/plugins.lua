@@ -72,16 +72,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug 'williamboman/mason.nvim'
   Plug 'williamboman/mason-lspconfig.nvim'
 
-  -- COC
-  -- Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-  -- Debugging
-  -- Plug 'mfussenegger/nvim-dap'
-  -- Plug 'leoluz/nvim-dap-go'
-  -- Plug 'rcarriga/nvim-dap-ui'
-  -- Plug 'theHamsta/nvim-dap-virtual-text'
-  -- Plug 'nvim-telescope/telescope-dap.nvim'
-
   -- signature help
   Plug 'ray-x/lsp_signature.nvim'
 
