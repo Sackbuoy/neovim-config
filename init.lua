@@ -1,9 +1,11 @@
+-- In this file I set all the global options, define functions, 
+-- and configure the per-plugin options.
+-- keybinds at the bottom
 require('plugins')
 
 local opt = vim.opt
 local g = vim.g
 local cmd = vim.cmd
-local keymap = vim.keymap
 local api = vim.api
 local fn = vim.fn
 
@@ -39,8 +41,6 @@ g.mapleader = ' '
 
 cmd.colorscheme('OceanicNext')
 
--- Telescope
-
 local utils = require('telescope.utils')
 local builtin = require('telescope.builtin')
 _G.project_files = function()
@@ -51,31 +51,6 @@ _G.project_files = function()
         builtin.find_files()
     end 
 end 
-
-keymap.set('n', '<leader>ff', '<cmd>lua project_files()<CR>', {noremap=true})
-keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>')
-keymap.set('n', '<space>a', '<cmd>Telescope aerial<CR>', {noremap=true, silent=true})
-
--- NERDTree keybinds
-keymap.set('n', '<leader>l', ':NERDTreeToggle<CR>')
-keymap.set('n', '<leader>d', ':NERDTreeFind<CR>')
-
--- Global Keybinds
-keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>')
-keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
-keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
-keymap.set('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
-keymap.set('n', '<leader>u', ':UndotreeToggle<CR>')
-keymap.set('n', '<leader>E', ':Telescope diagnostics<CR>')
-
--- LSP keybinds
-keymap.set('n', 'gr', ':Telescope lsp_references<CR>')
-keymap.set('n', 'gi', ':Telescope lsp_implementations<CR>')
-keymap.set('n', 'gd', ':Telescope lsp_definitions<CR>')
-
--- system clipboard shortcuts
-keymap.set('v', '<leader>y', '"+y')
-keymap.set('v', '<leader>p', '"+p')
 
 -- rust.vim
 g.rust_clip_command = 'pbcopy' -- for mac
@@ -98,4 +73,44 @@ api.nvim_create_autocmd('BufWritePre', {
   command = "lua retain_window_exec('silent %!myfmt')",
 })
 
-  
+
+local keymap = vim.keymap
+-- Telescope
+keymap.set('n', '<leader>ff', '<cmd>lua project_files()<CR>', {noremap=true})
+keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>')
+keymap.set('n', '<space>a', '<cmd>Telescope aerial<CR>', {noremap=true, silent=true})
+
+-- NERDTree keybinds
+keymap.set('n', '<leader>l', ':NERDTreeToggle<CR>')
+keymap.set('n', '<leader>e', ':NERDTreeFind<CR>')
+keymap.set('n', '<leader>n', ':NERDTree .<CR>')
+
+-- Global Keybinds
+keymap.set('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')
+keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+keymap.set('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
+keymap.set('n', '<leader>u', ':UndotreeToggle<CR>')
+keymap.set('n', '<leader>E', ':Telescope diagnostics<CR>')
+
+-- LSP keybinds
+keymap.set('n', 'gr', ':Telescope lsp_references<CR>')
+keymap.set('n', 'gi', ':Telescope lsp_implementations<CR>')
+keymap.set('n', 'gd', ':Telescope lsp_definitions<CR>')
+
+-- system clipboard shortcuts
+keymap.set('v', '<leader>y', '"+y')
+keymap.set('v', '<leader>p', '"+p')
+
+-- remap redo(default undo is u)
+keymap.set('n', 'U', ':redo<CR>')
+
+-- harpoon
+keymap.set('n', '<leader>hl', '<cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>')
+keymap.set('n', '<leader>ha', '<cmd>lua require("harpoon.mark").add_file()<CR>')
+keymap.set('n', '<leader>o', '<cmd>lua require("harpoon.ui").nav_prev()<CR>')
+keymap.set('n', '<leader>i', '<cmd>lua require("harpoon.ui").nav_next()()<CR>')
+
+-- open github
+keymap.set('n', '<leader>g', ':OpenGithubFile<CR>')
+

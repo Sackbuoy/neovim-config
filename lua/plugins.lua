@@ -1,3 +1,5 @@
+-- This file is just for defining what plugins I have, and calling their respective 
+-- setup functions
 local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.config/nvim/plugged')
