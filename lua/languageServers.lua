@@ -1,5 +1,6 @@
 local configs = require('lspconfig.configs')
 local util = require('lspconfig.util')
+local lspconfig = require('lspconfig')
 
 if not configs.helm_ls then
   configs.helm_ls = {
@@ -26,6 +27,11 @@ if not configs.golangcilsp then
 end
 
 
+lspconfig.golangci_lint_ls.setup {
+	filetypes = {'go'} -- not golangci bc its dumb and can't figure out what its looking at
+}
+
+
 local opts = { noremap = true, silent = true }
 
 local global_keybinds = {
@@ -42,15 +48,21 @@ local global_keybinds = {
 
 
 local servers = {
-  'golangci_lint_ls',
+  -- 'golangci_lint_ls',
   'gopls',
   'rust_analyzer',
   'helm_ls',
   'tsserver',
   'angularls',
+  'lua_ls',
+  -- 'clangd',
+  'ccls',
+  'pyright',
+  'terraformls',
+  'yamlls',
+  'bashls',
 }
 
-local lspconfig = require 'lspconfig'
 --
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -61,9 +73,12 @@ local base_on_attach = function(client, bufnr)
   require('lsp_signature').on_attach(client, bufnr)
 end
 
+-- for completions
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = base_on_attach,
+    capabilities = capabilities,
   }
 end
-

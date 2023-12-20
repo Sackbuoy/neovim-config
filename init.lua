@@ -5,6 +5,7 @@ require('plugins')
 
 local opt = vim.opt
 local g = vim.g
+local b = vim.b
 local cmd = vim.cmd
 local api = vim.api
 local fn = vim.fn
@@ -58,6 +59,7 @@ g.rust_clip_command = 'pbcopy' -- for mac
 
 -- go
 g.go_gopls_enabled = 0 -- im doing gopls myself so i get universal keybinds
+g.go_imports_autosave = 1
 
 -- function for executing a command that rewrites the buffer,
 -- and then restores the cursor to its original location before the exec
@@ -72,6 +74,9 @@ api.nvim_create_autocmd('BufWritePre', {
   pattern = '*.go',
   command = "lua retain_window_exec('silent %!myfmt')",
 })
+
+
+b.copilot_enabled = true
 
 
 local keymap = vim.keymap
@@ -91,7 +96,7 @@ keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 keymap.set('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
 keymap.set('n', '<leader>u', ':UndotreeToggle<CR>')
-keymap.set('n', '<leader>E', ':Telescope diagnostics<CR>')
+keymap.set('n', '<leader>D', ':Telescope diagnostics<CR>')
 
 -- LSP keybinds
 keymap.set('n', 'gr', ':Telescope lsp_references<CR>')
