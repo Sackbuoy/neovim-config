@@ -14,31 +14,23 @@ if not configs.helm_ls then
   }
 end
 
-if not configs.golangcilsp then
- 	configs.golangcilsp = {
-		default_config = {
-			cmd = {'golangci-lint-langserver'},
-			root_dir = util.root_pattern('.git', 'go.mod'),
-			init_options = {
-					command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json", "--issues-exit-code=1" };
-			}
-		};
-	}
-end
-
-
-lspconfig.golangci_lint_ls.setup {
-	filetypes = {'go'} -- not golangci bc its dumb and can't figure out what its looking at
+lspconfig.lua_ls.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      }
+    }
+  }
 }
-
 
 local opts = { noremap = true, silent = true }
 
 local global_keybinds = {
-  ["gD"] = "<cmd>lua vim.lsp.buf.declaration()<CR>",
+  ["gD"] = "<cmd>lua vim.lsp.buf.type_definition()<CR>",
   ["gd"] = "<cmd>lua vim.lsp.buf.definition()<CR>", -- leaving this here in case telescope doesnt work
   ["K"] = "<cmd>lua vim.lsp.buf.hover()<CR>",
-  ["<C-k>"] = "<cmd>lua vim.lsp.buf.signature_help()<CR>",
+  ["<space>we"] = "<cmd>lua vim.lsp.buf.signature_help()<CR>",
   ["<space>wa"] = "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
   ["<space>wr"] = "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
   ["<space>wl"] = "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
@@ -46,21 +38,26 @@ local global_keybinds = {
   ["<space>ca"] = "<cmd>lua vim.lsp.buf.code_action()<CR>",
 }
 
+require('elixir').setup()
 
 local servers = {
-  -- 'golangci_lint_ls',
+  'golangci_lint_ls',
   'gopls',
   'rust_analyzer',
-  'helm_ls',
-  'tsserver',
+  -- 'helm_ls', -- custom setup() above
+  'ts_ls',
   'angularls',
-  'lua_ls',
+  'elixirls',
+  -- 'lua_ls', -- custom setup() above
   -- 'clangd',
   'ccls',
-  'pyright',
+  -- 'pyright',
+  'pylyzer',
   'terraformls',
   'yamlls',
   'bashls',
+  'gleam',
+  'nil_ls',
 }
 
 --
@@ -74,7 +71,6 @@ local base_on_attach = function(client, bufnr)
 end
 
 -- for completions
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {

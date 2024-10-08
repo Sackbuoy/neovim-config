@@ -6,6 +6,7 @@ require('plugins')
 local opt = vim.opt
 local g = vim.g
 local b = vim.b
+local o = vim.o
 local cmd = vim.cmd
 local api = vim.api
 local fn = vim.fn
@@ -13,6 +14,9 @@ local fn = vim.fn
 -- line numbers
 opt.number = true
 opt.relativenumber = true
+
+-- line wrap
+opt.wrap = false
 
 opt.shiftwidth = 2
 opt.tabstop = 2
@@ -31,6 +35,7 @@ opt.mouse = '' -- dumb that i have to set it to empty string
 -- visuals/colors
 opt.signcolumn = 'yes'
 opt.colorcolumn = '80'
+opt.textwidth = 80
 opt.termguicolors = true -- some themes need this
 
 -- idk honestly
@@ -40,18 +45,18 @@ opt.completeopt=menu,menuone,noselect
 -- set leader
 g.mapleader = ' '
 
-cmd.colorscheme('OceanicNext')
+cmd.colorscheme('space-nvim')
 
 local utils = require('telescope.utils')
 local builtin = require('telescope.builtin')
 _G.project_files = function()
-    local _, ret, _ = utils.get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' }) 
-    if ret == 0 then 
-        builtin.git_files() 
+    local _, ret, _ = utils.get_os_command_output({ 'git', 'rev-parse', '--is-inside-work-tree' })
+    if ret == 0 then
+        builtin.git_files()
     else
         builtin.find_files()
-    end 
-end 
+    end
+end
 
 -- rust.vim
 g.rust_clip_command = 'pbcopy' -- for mac
@@ -59,21 +64,28 @@ g.rust_clip_command = 'pbcopy' -- for mac
 
 -- go
 g.go_gopls_enabled = 0 -- im doing gopls myself so i get universal keybinds
-g.go_imports_autosave = 1
+g.go_fmt_autosave = 0
+g.go_imports_autosave = 0 -- doing this myself with myfmt autocmd in below LOLjk
 
 -- function for executing a command that rewrites the buffer,
 -- and then restores the cursor to its original location before the exec
 _G.retain_window_exec = function(args)
   local view = fn.winsaveview()
-  cmd.execute(arg)
+  api.nvim_command(args)
   fn.winrestview(view)
 end
 
 -- autocmd for running my formatter on go files
-api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*.go',
-  command = "lua retain_window_exec('silent %!myfmt')",
-})
+api.nvim_create_autocmd(
+    "BufWritePost",
+    {
+        pattern = "*.go",
+        callback = function()
+            vim.cmd("silent !golangci-lint run --fix")            
+            vim.cmd("edit")
+        end,
+    }
+)
 
 
 b.copilot_enabled = true
@@ -89,6 +101,10 @@ keymap.set('n', '<space>a', '<cmd>Telescope aerial<CR>', {noremap=true, silent=t
 keymap.set('n', '<leader>l', ':NERDTreeToggle<CR>')
 keymap.set('n', '<leader>e', ':NERDTreeFind<CR>')
 keymap.set('n', '<leader>n', ':NERDTree .<CR>')
+
+-- neotree keybinds
+-- keymap.set('n', '<leader>l', ':Neotree toggle<CR>')
+-- keymap.set('n', '<leader>e', ':Neotree reveal<CR>')
 
 -- Global Keybinds
 keymap.set('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>')

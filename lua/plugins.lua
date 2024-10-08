@@ -6,14 +6,20 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
   Plug('numToStr/Comment.nvim')
   Plug('preservim/nerdtree')
+
+  -- Plug('MunifTanjim/nui.nvim')
+  -- Plug('nvim-tree/nvim-web-devicons')
+  -- Plug('nvim-neo-tree/neo-tree.nvim')
+
+
   Plug('neovim/nvim-lspconfig')
   Plug('nvim-telescope/telescope.nvim')
 
   -- 'for' and 'do' are keywords so i gotta do this fuckery
-  Plug('nvim-treesitter/nvim-treesitter', { 
+  Plug('nvim-treesitter/nvim-treesitter', {
     -- this commit has a fix for telescope find_files() that fails on lua  otherwise
     -- commit = '668de0951a36ef17016074f1120b6aacbe6c4515',     
-    ['do'] = function() 
+    ['do'] = function()
       vim.call(':TSUpdate')
     end
   })
@@ -21,19 +27,21 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('f-person/git-blame.nvim')
   Plug('mbbill/undotree')
   Plug('stevearc/aerial.nvim')
- 
+
   Plug('lewis6991/gitsigns.nvim')
 
   -- This is for lazy loading plugins? ngl idk
+  -- lol literally just a library of random functions
   Plug('nvim-lua/plenary.nvim')
 
   -- Language specific plugins
   -- Go
-  Plug('fatih/vim-go', { 
-    ['do'] = function() 
-      vim.call(':GoUpdateBinaries')
-    end
-  })
+  -- Plug('fatih/vim-go', {
+  --   ['do'] = function()
+  --     vim.call(':GoUpdateBinaries')
+  --   end
+  -- })
+  Plug('meain/vim-jsontogo')
 
   -- Terraform
   Plug('hashivim/vim-terraform')
@@ -48,6 +56,13 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('HerringtonDarkholme/yats.vim')
   Plug('maxmellon/vim-jsx-pretty')
 
+  -- Elixir
+  -- Plug('elixir-tools/elixir-tools.nvim')
+  Plug('mhanberg/elixir.nvim')
+
+  -- Gleam
+  Plug('gleam-lang/gleam.vim')
+
   -- Themes
   Plug('dracula/vim', { as = 'dracula' })
   Plug('folke/tokyonight.nvim', { branch = 'main', as = 'tokyonight' })
@@ -57,6 +72,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('cocopon/iceberg.vim')
   Plug('ayu-theme/ayu-vim')
   Plug('mhartington/oceanic-next')
+  Plug('Th3Whit3Wolf/space-nvim')
 
   -- harpoon navigation
   Plug('ThePrimeagen/harpoon')
@@ -77,21 +93,31 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('ray-x/lsp_signature.nvim')
 
   -- Copilot
-  -- Plug('github/copilot.vim')
+  Plug('github/copilot.vim')
 
-  -- completions
-  Plug 'hrsh7th/cmp-nvim-lsp'
-  Plug 'hrsh7th/cmp-buffer'
-  Plug 'hrsh7th/cmp-path'
-  Plug 'hrsh7th/cmp-cmdline'
-  Plug 'hrsh7th/nvim-cmp'
+  -- for cheat.sh
+  Plug('RishabhRD/popfix')
+  Plug('RishabhRD/nvim-cheat.sh')
 
-  -- For vsnip users.
-  Plug 'hrsh7th/cmp-vsnip'
-  Plug 'hrsh7th/vim-vsnip'
+  Plug('christoomey/vim-tmux-navigator')
 
+  Plug('stevearc/conform.nvim')
+  -- other LLM's 
+  -- Plug('huynle/ogpt.nvim')
+  -- Plug('MunifTanjim/nui.nvim') -- this is a UI library, just a dependency
+  --
+  -- Plug('ellisonleao/glow.nvim')
+  -- Plug('lukas-reineke/headlines.nvim')
+  Plug('MeanderingProgrammer/render-markdown.nvim')
+
+  -- Diffs/PR's
+  -- Plug('sindrets/diffview.nvim')
+  -- Plug('pwntester/octo.nvim')
 vim.call('plug#end')
 
+-- require('octo').setup()
+
+require('render-markdown').setup()
 require('fidget').setup {}
 require('gitsigns').setup()
 require('lsp_signature').setup()
@@ -101,6 +127,9 @@ require('mason-lspconfig').setup()
 require('nvim-treesitter.configs').setup({
   ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
   auto_install = true, --auto install every lang
+  highlight = {
+    enable = true,
+  },
 })
 
 -- Telescope is special
@@ -113,53 +142,22 @@ telescope.setup({
 
 telescope.load_extension('aerial')
 require('aerial').setup()
+-- require('ogpt').setup() -- no clue if this is actually needed
+--
 
-local lsps = require('languageServers')
-
--- nvim-cmp setup
-local cmp = require'cmp'
-cmp.setup({
-  snippet = {
-    -- REQUIRED - you must specify a snippet engine
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-    end,
+local conform = require('conform')
+conform.setup({
+  formatters_by_ft = {
+    go = {'gofumpt'},
   },
-  window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-      end
-    end, { "i", "s" }),
-
-    ["<S-Tab>"] = cmp.mapping(function()
-      if cmp.visible() then
-        cmp.select_prev_item()
-      end
-    end, { "i", "s" }),
-  }),
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' }, -- For vsnip users.
-    -- { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
-  }, {
-    { name = 'buffer' },
-  })
 })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
+  end,
+})
+
+require('languageServers')
 
