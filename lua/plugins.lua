@@ -7,12 +7,8 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('numToStr/Comment.nvim')
   Plug('preservim/nerdtree')
 
-  -- Plug('MunifTanjim/nui.nvim')
-  -- Plug('nvim-tree/nvim-web-devicons')
-  -- Plug('nvim-neo-tree/neo-tree.nvim')
+  Plug('nvim-tree/nvim-web-devicons')
 
-
-  Plug('neovim/nvim-lspconfig')
   Plug('nvim-telescope/telescope.nvim')
 
   -- 'for' and 'do' are keywords so i gotta do this fuckery
@@ -34,34 +30,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   -- lol literally just a library of random functions
   Plug('nvim-lua/plenary.nvim')
 
-  -- Language specific plugins
-  -- Go
-  -- Plug('fatih/vim-go', {
-  --   ['do'] = function()
-  --     vim.call(':GoUpdateBinaries')
-  --   end
-  -- })
   Plug('meain/vim-jsontogo')
-
-  -- Terraform
-  Plug('hashivim/vim-terraform')
-
-  -- Rust
-  Plug('rust-lang/rust.vim')
-  -- Plug('alx741/vim-rustfmt' -- did some magic to make this always use nightly)
-  -- Plug('simrat39/rust-tools.nvim')
-
-  -- JS
-  Plug('yuezk/vim-js')
-  Plug('HerringtonDarkholme/yats.vim')
-  Plug('maxmellon/vim-jsx-pretty')
-
-  -- Elixir
-  -- Plug('elixir-tools/elixir-tools.nvim')
-  Plug('mhanberg/elixir.nvim')
-
-  -- Gleam
-  Plug('gleam-lang/gleam.vim')
 
   -- Themes
   Plug('dracula/vim', { as = 'dracula' })
@@ -85,10 +54,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('tyru/open-browser.vim')
   Plug('tyru/open-browser-github.vim')
 
-  -- For Lsp Installation
-  Plug('williamboman/mason.nvim')
-  Plug('williamboman/mason-lspconfig.nvim')
-
   -- signature help
   Plug('ray-x/lsp_signature.nvim')
 
@@ -102,62 +67,17 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('christoomey/vim-tmux-navigator')
 
   Plug('stevearc/conform.nvim')
-  -- other LLM's 
-  -- Plug('huynle/ogpt.nvim')
-  -- Plug('MunifTanjim/nui.nvim') -- this is a UI library, just a dependency
-  --
-  -- Plug('ellisonleao/glow.nvim')
-  -- Plug('lukas-reineke/headlines.nvim')
-  Plug('MeanderingProgrammer/render-markdown.nvim')
 
-  -- Diffs/PR's
-  -- Plug('sindrets/diffview.nvim')
-  -- Plug('pwntester/octo.nvim')
+  Plug('MeanderingProgrammer/render-markdown.nvim')
 vim.call('plug#end')
 
--- require('octo').setup()
+require('plugins-config.treesitter')
+require('plugins-config.telescope')
 
 require('render-markdown').setup()
 require('fidget').setup {}
 require('gitsigns').setup()
 require('lsp_signature').setup()
 require('Comment').setup()
-require('mason').setup()
-require('mason-lspconfig').setup()
-require('nvim-treesitter.configs').setup({
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
-  auto_install = true, --auto install every lang
-  highlight = {
-    enable = true,
-  },
-})
-
--- Telescope is special
-local telescope = require('telescope')
-telescope.setup({
-  defaults = {
-      file_ignore_patterns = { "^./.git/", "^node_modules/", "^vendor/", "^plugged/" },
-    }
-})
-
-telescope.load_extension('aerial')
 require('aerial').setup()
--- require('ogpt').setup() -- no clue if this is actually needed
---
-
-local conform = require('conform')
-conform.setup({
-  formatters_by_ft = {
-    go = {'gofumpt'},
-  },
-})
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function(args)
-    require("conform").format({ bufnr = args.buf })
-  end,
-})
-
-require('languageServers')
 
