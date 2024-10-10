@@ -1,26 +1,26 @@
---   'golangci_lint_ls',
---   'gopls',
---   'rust_analyzer',
---   -- 'helm_ls',
---   'ts_ls',
---   'angularls',
---   'elixirls',
---   -- 'lua_ls',
---   -- 'clangd',
---   'ccls',
---   -- 'pyright',
---   'pylyzer',
---   'terraformls',
---   'yamlls',
---   'bashls',
---   'gleam',
---   'nil_ls',
+--   "golangci_lint_ls",
+--   "gopls",
+--   "rust_analyzer",
+--   -- "helm_ls",
+--   "ts_ls",
+--   "angularls",
+--   "elixirls",
+--   -- "lua_ls",
+--   -- "clangd",
+--   "ccls",
+--   -- "pyright",
+--   "pylyzer",
+--   "terraformls",
+--   "yamlls",
+--   "bashls",
+--   "gleam",
+--   "nil_ls",
 
 local servers = {
   gopls = {
     name = "gopls",
-    cmd = "gopls",
-    root_dir = vim.fs.find({ "go.work", "go.mod", ".git" }, { upward = true })[1],
+    cmd = { "gopls", "serve" },
+    root_dir = vim.loop.cwd(),
     filetypes = { "go", "gomod", "gowork", "gotmpl" },
     formatter = {
       filetypes = { "*.go" },
@@ -29,8 +29,8 @@ local servers = {
   },
   rust_analyzer = {
     name = "rust-analyzer",
-    cmd = "rust-analyzer",
-    root_dir = vim.fs.find({ "cargo.toml", ".git" }, { upward = true })[1],
+    cmd = { "rust-analyzer" },
+    root_dir = vim.loop.cwd(),
     filetypes = { "rust" },
     formatter = {
       filetypes = { "*.rs" },
@@ -39,22 +39,109 @@ local servers = {
   },
   pylyzer = {
     name = "pylyzer",
-    cmd = "pylyzer",
-    root_dir = vim.fs.find({ "requirements.txt", ".git" }, { upward = true })[1],
+    cmd = { "pylyzer", "--server" },
+    root_dir = vim.loop.cwd(),
     filetypes = { "python" },
     formatter = {
       filetypes = { "*.py" },
       cmd = "black",
     },
   },
-  pyright = {
-    name = "pyright",
-    cmd = "pyright",
-    root_dir = vim.fs.find({ "requirements.txt", ".git" }, { upward = true })[1],
-    filetypes = { "python" },
+  elixir_ls = {
+    name = "elixir-ls",
+    cmd = { "elixir-ls" },
+    root_dir = vim.loop.cwd(),
+    filetypes = { "elixir" },
     formatter = {
-      filetypes = { "*.py" },
-      cmd = "black",
+      filetypes = { "*.ex", "*.exs" },
+      cmd = "mix format",
+    },
+  },
+  terraformls = {
+    name = "terraform-ls",
+    cmd = { "terraform-ls", "serve" },
+    root_dir = vim.loop.cwd(),
+    filetypes = { "terraform", "terraform-vars", "hcl" },
+    formatter = {
+      filetypes = { "*.tf" },
+      cmd = "terraform fmt",
+    },
+  },
+  typescript_language_server = {
+    name = "typescript-language-server",
+    cmd = { "typescript-language-server", "--stdio" },
+    root_dir = vim.loop.cwd(),
+    filetypes = {
+      "javascript",
+      "javascriptreact",
+      "javascript.jsx",
+      "typescript",
+      "typescriptreact",
+      "typescript.tsx",
+    },
+    formatter = {
+      filetypes = { "*.ts", "*.tsx" },
+      cmd = "prettier --write",
+    },
+  },
+  angularls = {
+    name = "angular-ls",
+    cmd = { "ngserver", "--stdio", "--tsProbeLocations", vim.fn.getcwd(), "--ngProbeLocations", vim.fn.getcwd() },
+    root_dir = vim.loop.cwd(),
+    filetypes = { "angular" },
+    formatter = {
+      filetypes = { "*.ts", "*.html" },
+      cmd = "prettier --write",
+    },
+  },
+  bash_language_server = {
+    name = "bash-language-server",
+    cmd = { "bash-language-server", "start" },
+    root_dir = vim.loop.cwd(),
+    filetypes = { "sh" },
+    formatter = {
+      filetypes = { "*.sh" },
+      cmd = "",
+    },
+  },
+  gleamls = {
+    name = "gleam-ls",
+    cmd = { "gleamlsp" }, -- this isnt expanding the args for some reason so i made this binary
+    root_dir = vim.loop.cwd(),
+    filetypes = { "gleam" },
+    formatter = {
+      filetypes = { "*.gleam" },
+      cmd = "gleam format",
+    },
+  },
+  lua_ls = {
+    name = "lua-ls",
+    cmd = { "lua-language-server" },
+    root_dir = vim.loop.cwd(),
+    filetypes = { "lua" },
+    formatter = {
+      filetypes = { "*.lua" },
+      cmd = "lua-format",
+    },
+  },
+  helm_ls = {
+    name = "helm-ls",
+    cmd = { "helm_ls", "serve" },
+    root_dir = vim.loop.cwd(),
+    filetypes = { "helm", "yaml" },
+    formatter = {
+      filetypes = { "*.helm" },
+      cmd = "helm lint",
+    },
+  },
+  yaml_ls = {
+    name = "yaml-ls",
+    cmd = { "yamlls" }, -- not expanding args either
+    root_dir = vim.loop.cwd(),
+    filetypes = { "yaml" },
+    formatter = {
+      filetypes = { "*.yaml", "*.yml" },
+      cmd = "prettier --write",
     },
   },
 }
@@ -66,7 +153,7 @@ for _, lsp in pairs(servers) do
     callback = function()
       local client = vim.lsp.start({
           name = lsp.name,
-          cmd = { lsp.cmd },
+          cmd = lsp.cmd,
           root_dir = lsp.root_dir,
       })
       vim.lsp.buf_attach_client(0, client)
