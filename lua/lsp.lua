@@ -22,6 +22,7 @@ local servers = {
     cmd = { "gopls", "serve" },
     root_dir = vim.loop.cwd(),
     filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    autoformat = false,
     formatter = {
       filetypes = { "*.go" },
       cmd = "golangci-lint run --fix",
@@ -171,15 +172,25 @@ for _, lsp in pairs(servers) do
         init_options = lsp.init_options,
       })
       vim.lsp.buf_attach_client(0, client)
+
+      vim.api.nvim_create_user_command("Fmt", 
+        function()
+          command = string.format("silent !%s", cmd)
+          vim.cmd(command)
+          vim.cmd("edit")
+        end, {}
+      )
     end
   })
-  autocmd("BufWritePost", {
-    pattern = lsp.formatter.filetypes,
-    callback = function()
-      command = string.format("silent !%s", lsp.formatter.cmd)
-      vim.cmd(command)
-      vim.cmd("edit")
-    end
-  })
+  if lsp.autoformat then
+    autocmd("BufWritePost", {
+      pattern = lsp.formatter.filetypes,
+      callback = function()
+        command = string.format("silent !%s", lsp.formatter.cmd)
+        vim.cmd(command)
+        vim.cmd("edit")
+      end
+    })
+  end
 end
 
