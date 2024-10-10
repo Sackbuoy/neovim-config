@@ -27,6 +27,19 @@ local servers = {
       cmd = "golangci-lint run --fix",
     },
   },
+  golanci_lint_ls = {
+    name = "golangci-lint-ls",
+    cmd = { "golangci-lint-langserver" },
+    root_dir = vim.loop.cwd(),
+    filetypes = { "go", "gomod" },
+    formatter = {
+      filetypes = { "*.go" },
+      cmd = "",
+    },
+    init_options = {
+      command = {"golangci-lint", "run", "--out-format", "json" },
+    },
+  },
   rust_analyzer = {
     name = "rust-analyzer",
     cmd = { "rust-analyzer" },
@@ -152,9 +165,10 @@ for _, lsp in pairs(servers) do
     pattern = lsp.filetypes,
     callback = function()
       local client = vim.lsp.start({
-          name = lsp.name,
-          cmd = lsp.cmd,
-          root_dir = lsp.root_dir,
+        name = lsp.name,
+        cmd = lsp.cmd,
+        root_dir = lsp.root_dir,
+        init_options = lsp.init_options,
       })
       vim.lsp.buf_attach_client(0, client)
     end
@@ -162,7 +176,7 @@ for _, lsp in pairs(servers) do
   autocmd("BufWritePost", {
     pattern = lsp.formatter.filetypes,
     callback = function()
-      command = string.format("silent !%s", lsp.formatter.cmd) 
+      command = string.format("silent !%s", lsp.formatter.cmd)
       vim.cmd(command)
       vim.cmd("edit")
     end
