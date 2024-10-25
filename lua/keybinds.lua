@@ -2,7 +2,7 @@ local keybinds = {
   -- LSP stuff
   ["gD"] = {
     mode = "n",
-    cmd = "<cmd>lua vim.lsp.buf.type_definition()<CR>",
+    cmd = ":Telescope lsp_type_definitions<CR>",
     opts = {noremap=true, silent=true},
   },
   ["gd"] = {
@@ -25,26 +25,6 @@ local keybinds = {
     cmd = "<cmd>lua vim.lsp.buf.hover()<CR>",
     opts = {noremap=true, silent=true},
   },
-  ["<leader>we"] = {
-    mode = "n",
-    cmd = "<cmd>lua vim.lsp.buf.signature_help()<CR>",
-    opts = {noremap=true, silent=true},
-  },
-  ["<leader>wa"] = {
-    mode = "n",
-    cmd = "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>",
-    opts = {noremap=true, silent=true},
-  },
-  ["<leader>wr"] = {
-    mode = "n",
-    cmd = "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>",
-    opts = {noremap=true, silent=true},
-  },
-  ["<leader>wl"] = {
-    mode = "n",
-    cmd = "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-    opts = {noremap=true, silent=true},
-  },
   ["<leader>rn"] = {
     mode = "n",
     cmd = "<cmd>lua vim.lsp.buf.rename()<CR>",
@@ -55,15 +35,20 @@ local keybinds = {
     cmd = "<cmd>lua vim.lsp.buf.code_action()<CR>",
     opts = {noremap=true, silent=true},
   },
+  -- ["<Tab>"] = {
+  --   mode = "i",
+  --   cmd = "<cmd>lua vim.lsp.buf.completion()<CR>",
+  --   opts = {noremap=true, silent=true},
+  -- },
 
 
   -- Telescope
-  ["<leader>ff"] = {
+  ["<leader>f"] = {
     mode = "n",
-    cmd = "<cmd>lua project_files()<CR>",
+    cmd = "<cmd>:Telescope find_files<CR>",
     opts = {noremap=true, silent=true},
   },
-  ["<leader>fg"] = {
+  ["<leader>g"] = {
     mode = "n",
     cmd = ":Telescope live_grep<CR>",
     opts = {noremap=true, silent=true},
@@ -148,7 +133,7 @@ local keybinds = {
 
 
   -- Open Github
-  ["<leader>g"] = {
+  ["<leader>G"] = {
     mode = "n",
     cmd = ":OpenGithubFile()<CR>",
     opts = {noremap=true, silent=true},

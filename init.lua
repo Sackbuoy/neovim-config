@@ -47,8 +47,5 @@ g.mapleader = ' '
 
 cmd.colorscheme('space-nvim')
 
-b.copilot_enabled = true
-
-
 require('keybinds')
 require('lsp')

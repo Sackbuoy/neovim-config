@@ -10,6 +10,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('nvim-tree/nvim-web-devicons')
 
   Plug('nvim-telescope/telescope.nvim')
+  Plug('Yggdroot/LeaderF', { ['do'] = ':LeaderfInstallCExtension' })
 
   -- 'for' and 'do' are keywords so i gotta do this fuckery
   Plug('nvim-treesitter/nvim-treesitter', {
@@ -57,8 +58,13 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   -- signature help
   Plug('ray-x/lsp_signature.nvim')
 
-  -- Copilot
-  Plug('github/copilot.vim')
+  -- Completions
+  -- Plug('github/copilot.vim')
+  Plug('hrsh7th/cmp-nvim-lsp')
+  Plug('hrsh7th/cmp-buffer')
+  Plug('hrsh7th/cmp-path')
+  Plug('hrsh7th/cmp-cmdline')
+  Plug('hrsh7th/nvim-cmp')
 
   -- for cheat.sh
   Plug('RishabhRD/popfix')
@@ -69,10 +75,12 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('stevearc/conform.nvim')
 
   Plug('MeanderingProgrammer/render-markdown.nvim')
+
 vim.call('plug#end')
 
 require('plugins-config.treesitter')
 require('plugins-config.telescope')
+require('plugins-config.nvim-cmp')
 
 require('render-markdown').setup()
 require('fidget').setup {}
