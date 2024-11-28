@@ -18,8 +18,9 @@
 --
 --
 local formatcommandlist = {}
-local runformatcommands = function()
-  for _, cmd in pairs(formatcommandlist) do
+local autoformatcommandlist = {}
+local runformatcommands = function(cmdList)
+  for _, cmd in pairs(cmdList) do
     cmd.cmd()
   end
 end
@@ -45,22 +46,19 @@ local servers = {
     cmd = { "gopls", "serve" },
     root_dir = vim.loop.cwd(),
     filetypes = { "go", "gomod", "gowork", "gotmpl" },
-    autoformat = true,
     formatters = {
       filetypes = { "*.go" },
       formatcommands = {
         {
           name = "goimports",
           cmd = goimports,
+          autoformat = false,
         },
-        {
-          name = "gci",
-          cmd = gci,
-        },
-        {
-          name = "golangcilint",
-          cmd = golangcilintfix,
-        },
+        -- {
+        --   name = "gci",
+        --   cmd = gci,
+        --   autoformat = true,
+        -- },
       },
     },
   },
@@ -71,6 +69,13 @@ local servers = {
     filetypes = { "go", "gomod" },
     formatters = {
       filetypes = { "*.go" },
+      formatcommands = {
+        {
+          name = "golangcilint",
+          cmd = golangcilintfix,
+          autoformat = false,
+        },
+      },
     },
     init_options = {
       command = {"golangci-lint", "run", "--out-format", "json" },
@@ -81,7 +86,7 @@ local servers = {
     cmd = { "rust-analyzer" },
     root_dir = vim.loop.cwd(),
     filetypes = { "rust" },
-    formatter = {
+    formatters = {
       filetypes = { "*.rs" },
       commands = {
         "rustfmt",
@@ -93,7 +98,7 @@ local servers = {
     cmd = { "pylyzer", "--server" },
     root_dir = vim.loop.cwd(),
     filetypes = { "python" },
-    formatter = {
+    formatters = {
       filetypes = { "*.py" },
       commands = {
         "black",
@@ -105,7 +110,7 @@ local servers = {
   --   cmd = { "elixir-ls" },
   --   root_dir = vim.loop.cwd(),
   --   filetypes = { "elixir" },
-  --   formatter = {
+  --   formatters = {
   --     filetypes = { "*.ex", "*.exs" },
   --     commands = {
     --     "mix format",
@@ -117,7 +122,7 @@ local servers = {
     cmd = { "start_lexical.sh" }, -- this is weird, symlink doesnt work
     root_dir = vim.loop.cwd(),
     filetypes = { "elixir" },
-    formatter = {
+    formatters = {
       filetypes = { "*.lexical" },
       -- commands = { "lexical format" },
     },
@@ -127,7 +132,7 @@ local servers = {
     cmd = { "erlang_ls" },
     root_dir = vim.loop.cwd(),
     filetypes = { "erlang" },
-    formatter = {
+    formatters = {
       filetypes = { "*.erl" },
       commands = { "erl_tidy" },
     },
@@ -137,7 +142,7 @@ local servers = {
     cmd = { "terraform-ls", "serve" },
     root_dir = vim.loop.cwd(),
     filetypes = { "terraform", "terraform-vars", "hcl" },
-    formatter = {
+    formatters = {
       filetypes = { "*.tf" },
       commands = { "terraform fmt" },
     },
@@ -154,7 +159,7 @@ local servers = {
       "typescriptreact",
       "typescript.tsx",
     },
-    formatter = {
+    formatters = {
       filetypes = { "*.ts", "*.tsx" },
       commands = { "prettier --write" },
     },
@@ -164,7 +169,7 @@ local servers = {
     cmd = { "ngserver", "--stdio", "--tsProbeLocations", vim.fn.getcwd(), "--ngProbeLocations", vim.fn.getcwd() },
     root_dir = vim.loop.cwd(),
     filetypes = { "angular" },
-    formatter = {
+    formatters = {
       filetypes = { "*.ts", "*.html" },
       commands = { "prettier --write" },
     },
@@ -174,7 +179,7 @@ local servers = {
     cmd = { "bash-language-server", "start" },
     root_dir = vim.loop.cwd(),
     filetypes = { "sh" },
-    formatter = {
+    formatters = {
       filetypes = { "*.sh" },
       commands = { "" },
     },
@@ -184,7 +189,7 @@ local servers = {
     cmd = { "gleamlsp" }, -- this isnt expanding the args for some reason so i made this binary
     root_dir = vim.loop.cwd(),
     filetypes = { "gleam" },
-    formatter = {
+    formatters = {
       filetypes = { "*.gleam" },
       commands =  {"gleam format" },
     },
@@ -194,7 +199,7 @@ local servers = {
     cmd = { "lua-language-server" },
     root_dir = vim.loop.cwd(),
     filetypes = { "lua" },
-    formatter = {
+    formatters = {
       filetypes = { "*.lua" },
       commands = { "lua-format" },
     },
@@ -204,7 +209,7 @@ local servers = {
     cmd = { "helm_ls", "serve" },
     root_dir = vim.loop.cwd(),
     filetypes = { "helm", "yaml" },
-    formatter = {
+    formatters = {
       filetypes = { "*.helm" },
       commands = { "helm lint" },
     },
@@ -214,7 +219,7 @@ local servers = {
     cmd = { "yamlls" }, -- not expanding args either
     root_dir = vim.loop.cwd(),
     filetypes = { "yaml" },
-    formatter = {
+    formatters = {
       filetypes = { "*.yaml", "*.yml" },
       commands = { "prettier --write" },
     },
@@ -237,7 +242,13 @@ for _, lsp in pairs(servers) do
 
       if (lsp.formatters ~= nil and lsp.formatters.formatcommands ~= nil) then
         for _, formatter in pairs(lsp.formatters.formatcommands) do
-          formatcommandlist[formatter.name] =  { cmd = formatter.cmd }
+
+          if (formatter.autoformat) then
+            autoformatcommandlist[formatter.name] = { cmd = formatter.cmd }
+            -- autoformatcommandlist.insert(formatter, { cmd = formatter.cmd })
+          else
+            formatcommandlist[formatter.name] =  { cmd = formatter.cmd }
+          end
         end
       end
 
@@ -245,19 +256,17 @@ for _, lsp in pairs(servers) do
 
       vim.api.nvim_create_user_command("Fmt",
         function()
-          runformatcommands()
+          runformatcommands(formatcommandlist)
         end, {}
       )
     end
   })
 
-  if lsp.autoformat then
-    autocmd("BufWritePost", {
-      pattern = lsp.formatters.filetypes,
-      group = formattergroup,
-      callback = function()
-        runformatcommands()
-      end
-    })
-  end
+  autocmd("BufWritePost", {
+    pattern = lsp.formatters.filetypes,
+    group = formattergroup,
+    callback = function()
+      runformatcommands(autoformatcommandlist)
+    end
+  })
 end

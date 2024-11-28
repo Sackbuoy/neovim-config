@@ -76,7 +76,7 @@ local keybinds = {
     cmd = ":NERDTreeFind<CR>",
     opts = {noremap=true, silent=true},
   },
-  ["<leader>n"] = {
+  ["<leader>."] = {
     mode = "n",
     cmd = ":NERDTree .<CR>",
     opts = {noremap=true, silent=true},
@@ -155,7 +155,39 @@ local keybinds = {
   -- Remap redo
   ["U"] = {
     mode = "n",
-    cmd = ":redo<CR>",
+    cmd = "<cmd>lua vim.lsp.buf.hover()<CR>",
+    opts = {noremap=true, silent=true},
+  },
+
+  -- Debugging
+  ["<leader>b"] = {
+    mode = "n",
+    cmd = "<cmd>lua require('dap').toggle_breakpoint()<CR>",
+    opts = {noremap=true, silent=true},
+  },
+  ["<leader>c"] = {
+    mode = "n",
+    cmd = "<cmd>lua require('dap').continue()<CR>",
+    opts = {noremap=true, silent=true},
+  },
+  ["<leader>s"] = {
+    mode = "n",
+    cmd = "<cmd>lua require('dap').step_into()<CR>",
+    opts = {noremap=true, silent=true},
+  },
+  ["<leader>n"] = {
+    mode = "n",
+    cmd = "<cmd>lua require('dap').step_over()<CR>",
+    opts = {noremap=true, silent=true},
+  },
+  ["<leader>db"] = {
+    mode = "n",
+    cmd = "<cmd>lua require('dapui').toggle()<CR>",
+    opts = {noremap=true, silent=true},
+  },
+  ["<leader>v"] = {
+    mode = "v",
+    cmd = "<cmd>lua require('dapui').eval()<CR>",
     opts = {noremap=true, silent=true},
   },
 }

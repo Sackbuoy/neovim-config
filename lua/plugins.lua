@@ -76,11 +76,24 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
   Plug('MeanderingProgrammer/render-markdown.nvim')
 
+  Plug('Zeioth/compiler.nvim', { cmd = {"CompilerOpen", "CompilerToggleResults", "CompilerRedo"} })
+  Plug('stevearc/overseer.nvim', { cmd = {"CompilerOpen", "CompilerToggleResults", "CompilerRedo"} })
+
+  -- Debuggers
+  Plug('mfussenegger/nvim-dap')
+  -- Plug('theHamsta/nvim-dap-virtual-text')
+  Plug('rcarriga/nvim-dap-ui')
+  Plug('nvim-neotest/nvim-nio')
+
+  -- Handling large files
+  Plug('LunarVim/bigfile.nvim')
+
 vim.call('plug#end')
 
 require('plugins-config.treesitter')
 require('plugins-config.telescope')
 require('plugins-config.nvim-cmp')
+require('plugins-config.nvim-dap')
 
 require('render-markdown').setup()
 require('fidget').setup {}
@@ -88,4 +101,5 @@ require('gitsigns').setup()
 require('lsp_signature').setup()
 require('Comment').setup()
 require('aerial').setup()
-
+require('compiler').setup()
+require('bigfile').setup()
