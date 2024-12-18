@@ -35,12 +35,6 @@ local keybinds = {
     cmd = "<cmd>lua vim.lsp.buf.code_action()<CR>",
     opts = {noremap=true, silent=true},
   },
-  -- ["<Tab>"] = {
-  --   mode = "i",
-  --   cmd = "<cmd>lua vim.lsp.buf.completion()<CR>",
-  --   opts = {noremap=true, silent=true},
-  -- },
-
 
   -- Telescope
   ["<leader>f"] = {
@@ -58,12 +52,11 @@ local keybinds = {
     cmd = "<cmd>Telescope aerial<CR>",
     opts = {noremap=true, silent=true},
   },
-  ["<leader>D"] = {
+  ["<leader>DD"] = {
     mode = "n",
     cmd = ":Telescope diagnostics<CR>",
     opts = {noremap=true, silent=true},
   },
-
 
   -- NERDTree keybinds
   ["<leader>l"] = {
@@ -83,7 +76,7 @@ local keybinds = {
   },
 
   -- Global Keybinds
-  ["<leader>d"] = {
+  ["<leader>D"] = {
     mode = "n",
     cmd = "<cmd>lua vim.diagnostic.open_float()<CR>",
     opts = {noremap=true, silent=true},
@@ -103,7 +96,7 @@ local keybinds = {
     cmd = "<cmd>lua vim.diagnostic.setloclist()<CR>",
     opts = {noremap=true, silent=true},
   },
-  ["<leader>u"] = {
+  ["<leader>U"] = {
     mode = "n",
     cmd = ":UndotreeToggle<CR>",
     opts = {noremap=true, silent=true},
@@ -120,12 +113,12 @@ local keybinds = {
     cmd = "<cmd>lua require('harpoon.mark').add_file()<CR>",
     opts = {noremap=true, silent=true},
   },
-  ["<leader>o"] = {
+  ["<leader>ho"] = {
     mode = "n",
     cmd = "<cmd>lua require('harpoon.ui').nav_prev()<CR>",
     opts = {noremap=true, silent=true},
   },
-  ["<leader>i"] = {
+  ["<leader>hi"] = {
     mode = "n",
     cmd = "<cmd>lua require('harpoon.ui').nav_next()<CR>",
     opts = {noremap=true, silent=true},
@@ -155,7 +148,7 @@ local keybinds = {
   -- Remap redo
   ["U"] = {
     mode = "n",
-    cmd = "<cmd>lua vim.lsp.buf.hover()<CR>",
+    cmd = ":redo<CR>",
     opts = {noremap=true, silent=true},
   },
 
@@ -180,7 +173,7 @@ local keybinds = {
     cmd = "<cmd>lua require('dap').step_over()<CR>",
     opts = {noremap=true, silent=true},
   },
-  ["<leader>db"] = {
+  ["dbg"] = {
     mode = "n",
     cmd = "<cmd>lua require('dapui').toggle()<CR>",
     opts = {noremap=true, silent=true},

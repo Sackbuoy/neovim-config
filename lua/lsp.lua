@@ -210,20 +210,20 @@ local servers = {
     root_dir = vim.loop.cwd(),
     filetypes = { "helm", "yaml" },
     formatters = {
-      filetypes = { "*.helm" },
+      filetypes = { "*.yaml", "*.yml", ".tpl" },
       commands = { "helm lint" },
     },
   },
-  yaml_ls = {
-    name = "yaml-ls",
-    cmd = { "yamlls" }, -- not expanding args either
-    root_dir = vim.loop.cwd(),
-    filetypes = { "yaml" },
-    formatters = {
-      filetypes = { "*.yaml", "*.yml" },
-      commands = { "prettier --write" },
-    },
-  },
+  -- yaml_ls = {
+  --   name = "yaml-ls",
+  --   cmd = { "yamlls" }, -- not expanding args either
+  --   root_dir = vim.loop.cwd(),
+  --   filetypes = { "yaml" },
+  --   formatters = {
+  --     filetypes = { "*.yaml", "*.yml" },
+  --     commands = { "prettier --write" },
+  --   },
+  -- },
 }
 
 local autocmd = vim.api.nvim_create_autocmd

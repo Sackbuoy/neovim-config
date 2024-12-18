@@ -70,7 +70,8 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('RishabhRD/popfix')
   Plug('RishabhRD/nvim-cheat.sh')
 
-  Plug('christoomey/vim-tmux-navigator')
+  -- Plug('christoomey/vim-tmux-navigator')
+  Plug('mrjones2014/smart-splits.nvim')
 
   Plug('stevearc/conform.nvim')
 
@@ -94,6 +95,7 @@ require('plugins-config.treesitter')
 require('plugins-config.telescope')
 require('plugins-config.nvim-cmp')
 require('plugins-config.nvim-dap')
+require('plugins-config.smart-splits')
 
 require('render-markdown').setup()
 require('fidget').setup {}
