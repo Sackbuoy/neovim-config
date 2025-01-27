@@ -58,22 +58,27 @@ local keybinds = {
     opts = {noremap=true, silent=true},
   },
 
-  -- NERDTree keybinds
-  ["<leader>l"] = {
-    mode = "n",
-    cmd = ":NERDTreeToggle<CR>",
-    opts = {noremap=true, silent=true},
-  },
   ["<leader>e"] = {
     mode = "n",
-    cmd = ":NERDTreeFind<CR>",
+    cmd = ":Oil<CR>",
     opts = {noremap=true, silent=true},
   },
-  ["<leader>."] = {
-    mode = "n",
-    cmd = ":NERDTree .<CR>",
-    opts = {noremap=true, silent=true},
-  },
+  -- NERDTree keybinds
+  -- ["<leader>l"] = {
+  --   mode = "n",
+  --   cmd = ":NERDTreeToggle<CR>",
+  --   opts = {noremap=true, silent=true},
+  -- },
+  -- ["<leader>e"] = {
+  --   mode = "n",
+  --   cmd = ":NERDTreeFind<CR>",
+  --   opts = {noremap=true, silent=true},
+  -- },
+  -- ["<leader>."] = {
+  --   mode = "n",
+  --   cmd = ":NERDTree .<CR>",
+  --   opts = {noremap=true, silent=true},
+  -- },
 
   -- Global Keybinds
   ["<leader>D"] = {
@@ -113,12 +118,12 @@ local keybinds = {
     cmd = "<cmd>lua require('harpoon.mark').add_file()<CR>",
     opts = {noremap=true, silent=true},
   },
-  ["<leader>ho"] = {
+  ["<leader>o"] = {
     mode = "n",
     cmd = "<cmd>lua require('harpoon.ui').nav_prev()<CR>",
     opts = {noremap=true, silent=true},
   },
-  ["<leader>hi"] = {
+  ["<leader>i"] = {
     mode = "n",
     cmd = "<cmd>lua require('harpoon.ui').nav_next()<CR>",
     opts = {noremap=true, silent=true},
@@ -128,7 +133,7 @@ local keybinds = {
   -- Open Github
   ["<leader>G"] = {
     mode = "n",
-    cmd = ":OpenGithubFile()<CR>",
+    cmd = ":OpenGithubFile<CR>",
     opts = {noremap=true, silent=true},
   },
 
@@ -183,6 +188,28 @@ local keybinds = {
     cmd = "<cmd>lua require('dapui').eval()<CR>",
     opts = {noremap=true, silent=true},
   },
+
+  -- smart splits
+  -- ["<C-h>"] = {
+  --   mode = "n",
+  --   cmd = "<cmd>lua require('smart-splits').move_cursor_left()<CR>",
+  --   opts = {noremap=true, silent=true},
+  -- },
+  -- ["<C-l>"] = {
+  --   mode = "n",
+  --   cmd = "<cmd>lua require('smart-splits').move_cursor_right()<CR>",
+  --   opts = {noremap=true, silent=true},
+  -- },
+  -- ["<C-j>"] = {
+  --   mode = "n",
+  --   cmd = "<cmd>lua require('smart-splits').move_cursor_down()<CR>",
+  --   opts = {noremap=true, silent=true},
+  -- },
+  -- ["<C-k>"] = {
+  --   mode = "n",
+  --   cmd = "<cmd>lua require('smart-splits').move_cursor_up()<CR>",
+  --   opts = {noremap=true, silent=true},
+  -- },
 }
 
 local set_keybinds = function(keys)

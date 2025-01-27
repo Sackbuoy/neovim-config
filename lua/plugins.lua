@@ -70,7 +70,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('RishabhRD/popfix')
   Plug('RishabhRD/nvim-cheat.sh')
 
-  -- Plug('christoomey/vim-tmux-navigator')
   Plug('mrjones2014/smart-splits.nvim')
 
   Plug('stevearc/conform.nvim')
@@ -89,12 +88,15 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   -- Handling large files
   Plug('LunarVim/bigfile.nvim')
 
+  Plug('stevearc/oil.nvim')
+
 vim.call('plug#end')
 
 require('plugins-config.treesitter')
 require('plugins-config.telescope')
 require('plugins-config.nvim-cmp')
 require('plugins-config.nvim-dap')
+require('plugins-config.oil')
 require('plugins-config.smart-splits')
 
 require('render-markdown').setup()
