@@ -40,6 +40,12 @@ local golangcilintfix = function()
   vim.cmd('silent !golangci-lint run --fix '..vim.fn.expand("%"))
 end
 
+local alejandra = function()
+  vim.cmd('echo "Formatter: alejandra"')
+  vim.cmd('silent !alejandra .')
+end
+
+
 local servers = {
   gopls = {
     name = "gopls",
@@ -93,6 +99,18 @@ local servers = {
       },
     },
   },
+  -- pyright = {
+  --   name = "pyright",
+  --   cmd = { "pyright-langserver", "--stdio" },
+  --   root_dir = vim.loop.cwd(),
+  --   filetypes = { "python" },
+  --   formatters = {
+  --     filetypes = { "*.py" },
+  --     commands = {
+  --       "black",
+  --     },
+  --   },
+  -- },
   pylyzer = {
     name = "pylyzer",
     cmd = { "pylyzer", "--server" },
@@ -214,6 +232,16 @@ local servers = {
       commands = { "helm lint" },
     },
   },
+  -- ansible_ls = {
+  --   name = "ansible_ls",
+  --   cmd = { "ansible-language-server", "--stdio" },
+  --   root_dir = vim.loop.cwd(),
+  --   filetypes = { "yaml", "ini" },
+  --   formatters = {
+  --     -- filetypes = { "*.yaml", "*.yml", ".tpl" },
+  --     -- commands = { "helm lint" },
+  --   },
+  -- },
   -- yaml_ls = {
   --   name = "yaml-ls",
   --   cmd = { "yamlls" }, -- not expanding args either
@@ -224,6 +252,22 @@ local servers = {
   --     commands = { "prettier --write" },
   --   },
   -- },
+  nixd = {
+    name = "nixd",
+    cmd = { "nixd" },
+    root_dir = vim.loop.cwd(),
+    filetypes = { "nix" },
+    formatters = {
+      filetypes = { "*.nix" },
+      formatcommands = {
+        {
+          name = "alejandra",
+          cmd = alejandra,
+          autoformat = true,
+        },
+      },
+    },
+  },
 }
 
 local autocmd = vim.api.nvim_create_autocmd
