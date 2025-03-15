@@ -23,6 +23,13 @@ opt.tabstop = 2
 opt.softtabstop = 2
 opt.expandtab = true
 
+vim.api.nvim_create_user_command("Tabs",
+  function()
+    vim.opt.list = not vim.opt.list:get()
+    vim.opt.listchars = { tab = '>-' }
+  end, {}
+)
+
 -- other stuff idk how to categorize
 opt.showmatch = true
 opt.incsearch = false
