@@ -21,7 +21,7 @@
           pkgs.gotools
           pkgs.golangci-lint
 
-	  pkgs.gcc11
+	        pkgs.gcc11
 
           pkgs.rust-analyzer
           pkgs.rustfmt
@@ -41,6 +41,9 @@
           pkgs.lua-language-server
 
           pkgs.helm-ls
+
+          pkgs.alejandra
+          pkgs.nixd
 
           pkgs.ripgrep
         ];

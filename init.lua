@@ -5,11 +5,8 @@ require('plugins')
 
 local opt = vim.opt
 local g = vim.g
-local b = vim.b
-local o = vim.o
 local cmd = vim.cmd
 local api = vim.api
-local fn = vim.fn
 
 -- line numbers
 opt.number = true
@@ -23,10 +20,10 @@ opt.tabstop = 2
 opt.softtabstop = 2
 opt.expandtab = true
 
-vim.api.nvim_create_user_command("Tabs",
+api.nvim_create_user_command("Tabs",
   function()
-    vim.opt.list = not vim.opt.list:get()
-    vim.opt.listchars = { tab = '>-' }
+    opt.list = not opt.list:get()
+    opt.listchars = { tab = '>-' }
   end, {}
 )
 

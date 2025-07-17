@@ -63,22 +63,6 @@ local keybinds = {
     cmd = ":Oil<CR>",
     opts = {noremap=true, silent=true},
   },
-  -- NERDTree keybinds
-  -- ["<leader>l"] = {
-  --   mode = "n",
-  --   cmd = ":NERDTreeToggle<CR>",
-  --   opts = {noremap=true, silent=true},
-  -- },
-  -- ["<leader>e"] = {
-  --   mode = "n",
-  --   cmd = ":NERDTreeFind<CR>",
-  --   opts = {noremap=true, silent=true},
-  -- },
-  -- ["<leader>."] = {
-  --   mode = "n",
-  --   cmd = ":NERDTree .<CR>",
-  --   opts = {noremap=true, silent=true},
-  -- },
 
   -- Global Keybinds
   ["<leader>D"] = {
@@ -157,59 +141,17 @@ local keybinds = {
     opts = {noremap=true, silent=true},
   },
 
-  -- Debugging
-  ["<leader>b"] = {
-    mode = "n",
-    cmd = "<cmd>lua require('dap').toggle_breakpoint()<CR>",
-    opts = {noremap=true, silent=true},
-  },
-  ["<leader>c"] = {
-    mode = "n",
-    cmd = "<cmd>lua require('dap').continue()<CR>",
-    opts = {noremap=true, silent=true},
-  },
-  ["<leader>s"] = {
-    mode = "n",
-    cmd = "<cmd>lua require('dap').step_into()<CR>",
-    opts = {noremap=true, silent=true},
-  },
-  ["<leader>n"] = {
-    mode = "n",
-    cmd = "<cmd>lua require('dap').step_over()<CR>",
-    opts = {noremap=true, silent=true},
-  },
-  ["dbg"] = {
-    mode = "n",
-    cmd = "<cmd>lua require('dapui').toggle()<CR>",
-    opts = {noremap=true, silent=true},
-  },
-  ["<leader>v"] = {
+  -- Retain visual selection when tabbing
+  [">"] = {
     mode = "v",
-    cmd = "<cmd>lua require('dapui').eval()<CR>",
-    opts = {noremap=true, silent=true},
+    cmd = ">gv",
+    opts = {noremap=true},
   },
-
-  -- smart splits
-  -- ["<C-h>"] = {
-  --   mode = "n",
-  --   cmd = "<cmd>lua require('smart-splits').move_cursor_left()<CR>",
-  --   opts = {noremap=true, silent=true},
-  -- },
-  -- ["<C-l>"] = {
-  --   mode = "n",
-  --   cmd = "<cmd>lua require('smart-splits').move_cursor_right()<CR>",
-  --   opts = {noremap=true, silent=true},
-  -- },
-  -- ["<C-j>"] = {
-  --   mode = "n",
-  --   cmd = "<cmd>lua require('smart-splits').move_cursor_down()<CR>",
-  --   opts = {noremap=true, silent=true},
-  -- },
-  -- ["<C-k>"] = {
-  --   mode = "n",
-  --   cmd = "<cmd>lua require('smart-splits').move_cursor_up()<CR>",
-  --   opts = {noremap=true, silent=true},
-  -- },
+  ["<"] = {
+    mode = "v",
+    cmd = "<gv",
+    opts = {noremap=true},
+  },
 }
 
 local set_keybinds = function(keys)

@@ -79,23 +79,19 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('Zeioth/compiler.nvim', { cmd = {"CompilerOpen", "CompilerToggleResults", "CompilerRedo"} })
   Plug('stevearc/overseer.nvim', { cmd = {"CompilerOpen", "CompilerToggleResults", "CompilerRedo"} })
 
-  -- Debuggers
-  Plug('mfussenegger/nvim-dap')
-  -- Plug('theHamsta/nvim-dap-virtual-text')
-  Plug('rcarriga/nvim-dap-ui')
-  Plug('nvim-neotest/nvim-nio')
-
   -- Handling large files
   Plug('LunarVim/bigfile.nvim')
 
   Plug('stevearc/oil.nvim')
 
+  Plug('Sackbuoy/gsm-secrets')
+
+  Plug('ThePrimeagen/refactoring.nvim')
 vim.call('plug#end')
 
 require('plugins-config.treesitter')
 require('plugins-config.telescope')
 require('plugins-config.nvim-cmp')
-require('plugins-config.nvim-dap')
 require('plugins-config.oil')
 require('plugins-config.smart-splits')
 
@@ -107,3 +103,7 @@ require('Comment').setup()
 require('aerial').setup()
 require('compiler').setup()
 require('bigfile').setup()
+
+require('gsm-secrets').setup()
+
+require('refactoring').setup()
