@@ -2,6 +2,7 @@
 -- and configure the per-plugin options.
 -- keybinds at the bottom
 require('plugins')
+require('commands')
 
 local opt = vim.opt
 local g = vim.g
@@ -39,7 +40,6 @@ opt.mouse = '' -- dumb that i have to set it to empty string
 -- visuals/colors
 opt.signcolumn = 'yes'
 opt.colorcolumn = '80'
-opt.textwidth = 80
 opt.termguicolors = true -- some themes need this
 
 -- idk honestly

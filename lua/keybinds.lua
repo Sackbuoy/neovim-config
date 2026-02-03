@@ -114,10 +114,10 @@ local keybinds = {
   },
 
 
-  -- Open Github
+  -- Open Remote in browser
   ["<leader>G"] = {
     mode = "n",
-    cmd = ":OpenGithubFile<CR>",
+    cmd = ":BrowseLine<CR>",
     opts = {noremap=true, silent=true},
   },
 
@@ -150,6 +150,29 @@ local keybinds = {
   ["<"] = {
     mode = "v",
     cmd = "<gv",
+    opts = {noremap=true},
+  },
+  --
+  -- -- Smart Splits stuff
+  -- ["<C-h>"] = {
+  --   mode = "n",
+  --   cmd = ":SmartCursorMoveLeft",
+  -- },
+  -- ["<C-l>"] = {
+  --   mode = "n",
+  --   cmd = ":SmartCursorMoveRight",
+  -- },
+  -- ["<C-j>"] = {
+  --   mode = "n",
+  --   cmd = ":SmartCursorMoveDown",
+  -- },
+  -- ["<C-k>"] = {
+  --   mode = "n",
+  --   cmd = ":SmartCursorMoveUp",
+  -- },
+  ["ex"] = {
+    mode = "n",
+    cmd = ":!%:p<CR>",
     opts = {noremap=true},
   },
 }

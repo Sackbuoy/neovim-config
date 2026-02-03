@@ -1,11 +1,15 @@
 vim.lsp.enable({
     "gopls",
     "lua_ls",
-    "pyright",
+    "basedpyright",
+    "pytest_lsp",
+    -- "ruff",
+    -- "pylyzer",
     "rust-analyzer",
     "nixd",
     "golangci-lint-langserver",
-    "lexical",
+    "protobuf-language-server",
+    -- "lexical",
 })
 
 vim.diagnostic.config({

@@ -10,9 +10,10 @@ return {
      cargo = {
        allFeatures = true,
      },
-     checkOnSave = {
-       command = "clippy",
-     },
+     checkOnSave = true,
+     -- checkOnSave = {
+     --   command = "clippy",
+     -- },
      rustfmt = {
        extraArgs = { "+nightly" }, -- optional, for nightly rustfmt features
      },

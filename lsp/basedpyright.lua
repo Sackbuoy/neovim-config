@@ -1,5 +1,5 @@
 return {
-  cmd = { "basedpyright-langserver", "--stdio" },
+  cmd = { "pyright-langserver", "--stdio" },
   filetypes = { "python" },
   root_markers = {
     "pyproject.toml",
@@ -13,7 +13,7 @@ return {
     python = {
       analysis = {
         autoSearchPaths = true,
-        useLibraryCodeForTypes = true,
+        useLibraryCodeForTypes = true
       },
     },
   },
