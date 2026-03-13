@@ -16,12 +16,22 @@ return {
 		"stylua.toml",
 	},
 	settings = {
-	    Lua = {
-	        diagnostics = {
-	            --     disable = { "missing-parameters", "missing-fields" },
-              globals = {'vim'},
-	        },
-	    },
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        --     disable = { "missing-parameters", "missing-fields" },
+        -- globals = {'vim'},
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file('', true),
+        checkThirdParty = false,
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
 	},
 
 	single_file_support = true,

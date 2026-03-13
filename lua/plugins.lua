@@ -11,13 +11,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('nvim-telescope/telescope.nvim')
 
   -- 'for' and 'do' are keywords so i gotta do this fuckery
-  Plug('nvim-treesitter/nvim-treesitter', {
-    -- this commit has a fix for telescope find_files() that fails on lua  otherwise
-    -- commit = '668de0951a36ef17016074f1120b6aacbe6c4515',
-    ['do'] = function()
-      vim.call(':TSUpdate')
-    end
-  })
+  Plug('nvim-treesitter/nvim-treesitter')
 
   Plug('f-person/git-blame.nvim')
   Plug('mbbill/undotree')
@@ -72,7 +66,17 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
   Plug('stevearc/oil.nvim')
 
+  -- my stuff hehe
   Plug('Sackbuoy/gsm-secrets')
+  Plug('Sackbuoy/goto-caller.nvim')
+
+  Plug('benomahony/uv.nvim')
+
+  -- Claude
+  Plug('coder/claudecode.nvim')
+  Plug('folke/snacks.nvim')
+
+  Plug('nvim-treesitter/nvim-treesitter-context')
 vim.call('plug#end')
 
 require('plugins-config.treesitter')
@@ -80,8 +84,9 @@ require('plugins-config.telescope')
 require('plugins-config.nvim-cmp')
 require('plugins-config.oil')
 require('plugins-config.smart-splits')
+require('plugins-config.render-markdown')
+require('plugins-config.claude-code')
 
-require('render-markdown').setup()
 require('fidget').setup {}
 require('gitsigns').setup()
 require('lsp_signature').setup()
@@ -90,3 +95,5 @@ require('aerial').setup()
 require('bigfile').setup()
 
 require('gsm-secrets').setup()
+-- require('goto-caller').setup()
+require('uv').setup()

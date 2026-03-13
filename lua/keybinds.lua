@@ -1,3 +1,7 @@
+function _G._note_complete()
+  return vim.trim(vim.fn.system("note list"))
+end
+
 local keybinds = {
   -- LSP stuff
   ["gD"] = {
@@ -175,6 +179,47 @@ local keybinds = {
     cmd = ":!%:p<CR>",
     opts = {noremap=true},
   },
+  ["<leader>C"] = {
+    mode = {"n", "t"},
+    cmd = function() require('snacks').terminal.toggle(nil, { cwd = vim.fn.getcwd(), win = { position = "float", width = 0.7, height = 0.7 } }) end,
+    opts = {noremap=true, silent=true, desc="Toggle floating terminal"},
+  },
+  ["<leader>N"] = {
+    mode = {"n", "t"},
+    cmd = function()
+      local snacks = require('snacks')
+      local on_close = function()
+        -- When we toggle, we set this flag so on_close knows not to clear
+        if not vim.g._note_toggling then
+          vim.g._note_term_cmd = nil
+        end
+      end
+      local win_opts = { position = "float", width = 0.7, height = 0.7, on_close = on_close }
+      -- If a note terminal is already open, toggle it
+      if vim.g._note_term_cmd then
+        vim.g._note_toggling = true
+        snacks.terminal.toggle(vim.g._note_term_cmd, { win = win_opts })
+        vim.g._note_toggling = false
+        return
+      end
+      -- Otherwise prompt for a note name
+      vim.ui.input({ prompt = "Note: ", completion = "custom,v:lua._note_complete" }, function(name)
+        name = name and vim.trim(name)
+        if name and name ~= "" then
+          local cmd = "note " .. vim.fn.shellescape(name)
+          vim.g._note_term_cmd = cmd
+          snacks.terminal.toggle(cmd, { win = win_opts })
+        end
+      end)
+    end,
+    opts = {noremap=true, silent=true, desc="Open a note"},
+  },
+  ["so"] = {
+    mode = { "n" },
+    cmd = require("goto-caller").goto_caller,
+    opts = {noremap=true, desc="Jump to caller"},
+  },
+
 }
 
 local set_keybinds = function(keys)

@@ -8,8 +8,11 @@ vim.lsp.enable({
     "rust-analyzer",
     "nixd",
     "golangci-lint-langserver",
-    "protobuf-language-server",
+    -- "protobuf-language-server",
+    "bufls",
     -- "lexical",
+    "typescript-language-server",
+    -- "typos",
 })
 
 vim.diagnostic.config({

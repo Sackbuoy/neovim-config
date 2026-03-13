@@ -23,7 +23,7 @@ opt.expandtab = true
 
 api.nvim_create_user_command("Tabs",
   function()
-    opt.list = not opt.list:get()
+    vim.o.list = not vim.o.list
     opt.listchars = { tab = '>-' }
   end, {}
 )
@@ -44,7 +44,7 @@ opt.termguicolors = true -- some themes need this
 
 -- idk honestly
 opt.hidden = true -- keep buffers open
-opt.completeopt=menu,menuone,noselect
+opt.completeopt="menu,menuone,noselect"
 
 -- set leader
 g.mapleader = ' '
