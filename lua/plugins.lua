@@ -6,8 +6,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
   Plug('numToStr/Comment.nvim')
 
-  Plug('nvim-tree/nvim-web-devicons')
-
   Plug('nvim-telescope/telescope.nvim')
 
   -- 'for' and 'do' are keywords so i gotta do this fuckery
@@ -77,6 +75,12 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('folke/snacks.nvim')
 
   Plug('nvim-treesitter/nvim-treesitter-context')
+
+  -- also uses plenary and nvim-web-devicons
+  Plug('harrisoncramer/gitlab.nvim')
+  Plug('MunifTanjim/nui.nvim')
+  Plug('sindrets/diffview.nvim')
+  Plug('stevearc/dressing.nvim')
 vim.call('plug#end')
 
 require('plugins-config.treesitter')
@@ -86,6 +90,7 @@ require('plugins-config.oil')
 require('plugins-config.smart-splits')
 require('plugins-config.render-markdown')
 require('plugins-config.claude-code')
+require('plugins-config.gitlab')
 
 require('fidget').setup {}
 require('gitsigns').setup()

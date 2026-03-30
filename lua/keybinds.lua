@@ -214,7 +214,7 @@ local keybinds = {
     end,
     opts = {noremap=true, silent=true, desc="Open a note"},
   },
-  ["so"] = {
+  ["<leader>so"] = {
     mode = { "n" },
     cmd = require("goto-caller").goto_caller,
     opts = {noremap=true, desc="Jump to caller"},
