@@ -81,6 +81,8 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('MunifTanjim/nui.nvim')
   Plug('sindrets/diffview.nvim')
   Plug('stevearc/dressing.nvim')
+
+  Plug('zongben/dbout.nvim')
 vim.call('plug#end')
 
 require('plugins-config.treesitter')
@@ -98,7 +100,7 @@ require('lsp_signature').setup()
 require('Comment').setup()
 require('aerial').setup()
 require('bigfile').setup()
+require('dbout').setup()
 
 require('gsm-secrets').setup()
--- require('goto-caller').setup()
 require('uv').setup()
