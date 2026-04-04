@@ -2,58 +2,79 @@
   description = "A collection of binaries for my neovim install";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-        
-        # Define your collection of binaries here
-        myBinaries = [
-          pkgs.neovim
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+  }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
 
-          pkgs.gopls
-          pkgs.golangci-lint-langserver
-          pkgs.gci
-          pkgs.gotools
-          pkgs.golangci-lint
+      # Define your collection of binaries here
+      myBinaries = [
+        pkgs.neovim
 
-	        pkgs.gcc11
+        # Go
+        pkgs.gopls
+        pkgs.golangci-lint-langserver
+        # pkgs.gci  # broken in nixos-unstable
+        pkgs.gotools
+        pkgs.golangci-lint
+        pkgs.gofumpt
 
-          pkgs.rust-analyzer
-          pkgs.rustfmt
+        # C compiler (for treesitter parser compilation)
+        pkgs.gcc
 
-          pkgs.pylyzer
-          pkgs.black
+        # Rust
+        pkgs.rust-analyzer
+        pkgs.rustfmt
 
-          pkgs.terraform
-          pkgs.terraform-ls
+        # Python
+        pkgs.basedpyright
+        pkgs.black
 
-          pkgs.typescript-language-server
+        # Terraform
+        pkgs.opentofu
+        pkgs.terraform-ls
 
-          pkgs.angular-language-server
+        # TypeScript/JavaScript
+        pkgs.typescript-language-server
+        pkgs.nodejs_22
 
-          pkgs.bash-language-server
+        # Angular
+        pkgs.angular-language-server
 
-          pkgs.lua-language-server
+        # Bash
+        pkgs.bash-language-server
 
-          pkgs.helm-ls
+        # Lua
+        pkgs.lua-language-server
 
-          pkgs.alejandra
-          pkgs.nixd
+        # Helm
+        pkgs.helm-ls
 
-          pkgs.ripgrep
-        ];
-      in
-      {
-        # This creates a packages.default that includes all binaries
-        packages.default = pkgs.symlinkJoin {
-          name = "my-binaries";
-          paths = myBinaries;
-        };
-      });
+        # Nix
+        pkgs.alejandra
+        pkgs.nixd
+
+        # Protobuf
+        pkgs.buf
+
+        # Tools
+        pkgs.ripgrep
+        pkgs.fd
+        pkgs.git
+        pkgs.tree-sitter
+      ];
+    in {
+      # This creates a packages.default that includes all binaries
+      packages.default = pkgs.symlinkJoin {
+        name = "my-binaries";
+        paths = myBinaries;
+      };
+    });
 }
-

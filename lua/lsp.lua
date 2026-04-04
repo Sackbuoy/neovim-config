@@ -2,7 +2,7 @@ vim.lsp.enable({
     "gopls",
     "lua_ls",
     "basedpyright",
-    "pytest_lsp",
+    -- "pytest_lsp",  -- pytest-language-server not available in nixpkgs
     -- "ruff",
     -- "pylyzer",
     "rust-analyzer",
