@@ -13,6 +13,7 @@ vim.lsp.enable({
     -- "lexical",
     "typescript-language-server",
     -- "typos",
+    "hls",
 })
 
 vim.diagnostic.config({

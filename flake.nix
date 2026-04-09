@@ -64,6 +64,9 @@
         # Protobuf
         pkgs.buf
 
+        # Haskell
+        pkgs.haskell-language-server
+
         # Tools
         pkgs.ripgrep
         pkgs.fd
