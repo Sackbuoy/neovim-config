@@ -14,7 +14,31 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
 
-      # Define your collection of binaries here
+      tree-sitter-new = pkgs.tree-sitter.overrideAttrs (old: rec {
+        version = "0.26.1";
+        src = pkgs.fetchFromGitHub {
+          owner = "tree-sitter";
+          repo = "tree-sitter";
+          tag = "v${version}";
+          hash = "sha256-k8X2qtxUne8C6znYAKeb4zoBf+vffmcJZQHUmBvsilA=";
+          fetchSubmodules = true;
+        };
+        patches = [];
+        cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+          inherit src;
+          hash = "sha256-hnFHYQ8xPNFqic1UYygiLBWu3n82IkTJuQvgcXcMdv0=";
+        };
+        nativeBuildInputs =
+          old.nativeBuildInputs
+          ++ [
+            pkgs.llvmPackages.libclang
+            pkgs.stdenv.cc
+            pkgs.glibc.dev
+          ];
+        LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
+        BINDGEN_EXTRA_CLANG_ARGS = "-isystem ${pkgs.glibc.dev}/include -isystem ${pkgs.stdenv.cc.cc}/include";
+      });
+
       myBinaries = [
         pkgs.neovim
 
@@ -71,10 +95,9 @@
         pkgs.ripgrep
         pkgs.fd
         pkgs.git
-        pkgs.tree-sitter
+        tree-sitter-new # replaced pkgs.tree-sitter
       ];
     in {
-      # This creates a packages.default that includes all binaries
       packages.default = pkgs.symlinkJoin {
         name = "my-binaries";
         paths = myBinaries;

@@ -9,7 +9,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('nvim-telescope/telescope.nvim')
 
   -- 'for' and 'do' are keywords so i gotta do this fuckery
-  Plug('nvim-treesitter/nvim-treesitter')
+  Plug('nvim-treesitter/nvim-treesitter', {branch = 'main', ['do'] = ':TSUpdate'})
 
   Plug('f-person/git-blame.nvim')
   Plug('mbbill/undotree')
