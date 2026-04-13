@@ -26,6 +26,11 @@
 require('nvim-treesitter').setup({
   install_dir = vim.fn.stdpath('data') .. '/site',
 })
+vim.filetype.add({
+  extension = {
+    tofu = "terraform",
+  },
+})
 vim.api.nvim_create_autocmd('FileType', {
   callback = function(args)
     local ft = vim.bo[args.buf].filetype
