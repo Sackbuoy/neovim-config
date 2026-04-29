@@ -4,12 +4,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-23-11.url = "github:NixOS/nixpkgs/nixos-23.11";
+    zls.url = "github:zigtools/zls";
   };
 
   outputs = {
     self,
     nixpkgs,
     nixpkgs-23-11,
+    zls,
   }: let
     systems = ["x86_64-linux" "aarch64-darwin"];
 
@@ -121,6 +123,9 @@
 
         # Haskell
         pkgs.haskell-language-server
+
+        # Zig
+        zls.packages.${system}.zls
 
         # Tools
         pkgs.ripgrep

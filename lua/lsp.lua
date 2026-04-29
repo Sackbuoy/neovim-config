@@ -14,6 +14,7 @@ vim.lsp.enable({
     "typescript-language-server",
     -- "typos",
     "hls",
+    "zls",
 })
 
 vim.diagnostic.config({
