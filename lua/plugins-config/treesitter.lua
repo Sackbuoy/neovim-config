@@ -29,6 +29,7 @@ require('nvim-treesitter').setup({
 vim.filetype.add({
   extension = {
     tofu = "terraform",
+    k = "kcl",
   },
 })
 vim.api.nvim_create_autocmd('FileType', {

@@ -71,7 +71,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('benomahony/uv.nvim')
 
   -- Claude
-  Plug('coder/claudecode.nvim')
   Plug('folke/snacks.nvim')
 
   Plug('nvim-treesitter/nvim-treesitter-context')
@@ -91,7 +90,6 @@ require('plugins-config.nvim-cmp')
 require('plugins-config.oil')
 require('plugins-config.smart-splits')
 require('plugins-config.render-markdown')
-require('plugins-config.claude-code')
 require('plugins-config.gitlab')
 
 require('fidget').setup {}

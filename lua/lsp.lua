@@ -15,6 +15,7 @@ vim.lsp.enable({
     -- "typos",
     "hls",
     "zls",
+    "kcl-ls",
 })
 
 vim.diagnostic.config({

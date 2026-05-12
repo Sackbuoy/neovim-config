@@ -114,6 +114,9 @@
         # Helm
         pkgs.helm-ls
 
+        # KCL
+        pkgs.kittycad-kcl-lsp
+
         # Nix
         pkgs.alejandra
         pkgs.nixd
