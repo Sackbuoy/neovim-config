@@ -16,6 +16,7 @@ vim.lsp.enable({
     "hls",
     "zls",
     "kcl-ls",
+    "bash-language-server",
 })
 
 vim.diagnostic.config({

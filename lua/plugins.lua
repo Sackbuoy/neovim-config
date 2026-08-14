@@ -76,12 +76,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
   Plug('nvim-treesitter/nvim-treesitter-context')
 
-  -- also uses plenary and nvim-web-devicons
-  Plug('harrisoncramer/gitlab.nvim')
-  Plug('MunifTanjim/nui.nvim')
-  Plug('sindrets/diffview.nvim')
-  Plug('stevearc/dressing.nvim')
-
   Plug('zongben/dbout.nvim')
   Plug('justinmk/vim-sneak')
 vim.call('plug#end')
@@ -92,7 +86,6 @@ require('plugins-config.nvim-cmp')
 require('plugins-config.oil')
 require('plugins-config.smart-splits')
 require('plugins-config.render-markdown')
-require('plugins-config.gitlab')
 
 require('fidget').setup {}
 require('gitsigns').setup()

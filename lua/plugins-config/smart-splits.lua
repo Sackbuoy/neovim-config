@@ -15,4 +15,17 @@ vim.keymap.set('n', '<leader><leader>j', smartsplits.swap_buf_down)
 vim.keymap.set('n', '<leader><leader>k', smartsplits.swap_buf_up)
 vim.keymap.set('n', '<leader><leader>l', smartsplits.swap_buf_right)
 
+-- zoom current pane (tmux prefix+z equivalent)
+local zoomed = false
+local function toggle_zoom()
+  if zoomed then
+    vim.cmd('wincmd =')
+  else
+    vim.cmd('wincmd |')
+    vim.cmd('wincmd _')
+  end
+  zoomed = not zoomed
+end
+vim.keymap.set('n', '<C-w>z', toggle_zoom)
+
 smartsplits.setup()
