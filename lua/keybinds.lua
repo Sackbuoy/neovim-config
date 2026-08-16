@@ -219,7 +219,23 @@ local keybinds = {
     cmd = require("goto-caller").goto_caller,
     opts = {noremap=true, desc="Jump to caller"},
   },
-
+  -- Sneak keybinds n shite
+  ["f"] = {
+    mode = {'n', 'x', 'o'},
+    cmd = '<Plug>Sneak_f',
+  },
+  ["F"] = {
+    mode = {'n', 'x', 'o'},
+    cmd = '<Plug>Sneak_F',
+  },
+  ["t"] = {
+    mode = {'n', 'x', 'o'},
+    cmd = '<Plug>Sneak_t',
+  },
+  ["T"] = {
+    mode = {'n', 'x', 'o'},
+    cmd = '<Plug>Sneak_T',
+  },
 }
 
 local set_keybinds = function(keys)

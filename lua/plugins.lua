@@ -7,6 +7,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('numToStr/Comment.nvim')
 
   Plug('nvim-telescope/telescope.nvim')
+  Plug('nvim-telescope/telescope-frecency.nvim')
 
   -- 'for' and 'do' are keywords so i gotta do this fuckery
   Plug('nvim-treesitter/nvim-treesitter', {branch = 'main', ['do'] = ':TSUpdate'})
@@ -82,6 +83,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('stevearc/dressing.nvim')
 
   Plug('zongben/dbout.nvim')
+  Plug('justinmk/vim-sneak')
 vim.call('plug#end')
 
 require('plugins-config.treesitter')

@@ -12,8 +12,9 @@ end
 local telescope = require('telescope')
 telescope.setup({
   defaults = {
-      file_ignore_patterns = { "^./.git/", "^node_modules/", "^vendor/", "^plugged/" },
-    }
+    file_ignore_patterns = { "^./.git/", "^node_modules/", "^vendor/", "^plugged/" },
+  }
 })
 
 telescope.load_extension('aerial')
+telescope.load_extension('frecency')
