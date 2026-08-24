@@ -9,6 +9,9 @@ local g = vim.g
 local cmd = vim.cmd
 local api = vim.api
 
+-- Persist all 26 global marks (A-Z) across sessions
+opt.shada = "!,'100,<50,s10,h"
+
 -- line numbers
 opt.number = true
 opt.relativenumber = true
