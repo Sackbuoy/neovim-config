@@ -219,6 +219,17 @@ local keybinds = {
     cmd = require("goto-caller").goto_caller,
     opts = {noremap=true, desc="Jump to caller"},
   },
+  -- Test Stuff
+  ["<leader>tt"] = {
+    mode = { "n" },
+    cmd = ":TestNearest<CR>",
+    opts = {noremap=true, silent=true},
+  },
+  ["<leader>tf"] = {
+    mode = { "n" },
+    cmd = ":TestFile<CR>",
+    opts = {noremap=true, silent=true},
+  },
 }
 
 local set_keybinds = function(keys)

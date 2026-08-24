@@ -78,6 +78,8 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
   Plug('zongben/dbout.nvim')
   Plug('justinmk/vim-sneak')
+
+  Plug('vim-test/vim-test')
 vim.call('plug#end')
 
 require('plugins-config.treesitter')
@@ -86,6 +88,7 @@ require('plugins-config.nvim-cmp')
 require('plugins-config.oil')
 require('plugins-config.smart-splits')
 require('plugins-config.render-markdown')
+require('plugins-config.vim-test')
 
 require('fidget').setup {}
 require('gitsigns').setup()
