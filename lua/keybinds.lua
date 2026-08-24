@@ -251,4 +251,6 @@ for c = string.byte('a'), string.byte('z') do
   vim.keymap.set('n', "'" .. lower, "'" .. upper, { noremap = true, silent = true })
   -- jump to exact position of mark (backtick style)
   vim.keymap.set('n', '`' .. lower, '`' .. upper, { noremap = true, silent = true })
+  -- delete mark
+  vim.keymap.set('n', 'M' .. lower, ':delmarks ' .. upper .. '<CR>', { noremap = true, silent = true })
 end
