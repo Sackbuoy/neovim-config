@@ -43,7 +43,7 @@ return {
           debounce_timer:stop()
         end
         debounce_timer = vim.defer_fn(function()
-          vim.fn.jobstart({ "golangci-lint", "run", "--fix", pkg_dir .. "/..." }, {
+          vim.fn.jobstart({ "golangci-lint", "run", "--fix", "-D unused", pkg_dir .. "/..." }, {
             cwd = root,
             on_exit = function() reload_if_clean(bufnr, filename) end,
           })
