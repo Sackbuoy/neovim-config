@@ -13,7 +13,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('nvim-treesitter/nvim-treesitter', {branch = 'main', ['do'] = ':TSUpdate'})
 
   Plug('f-person/git-blame.nvim')
-  Plug('mbbill/undotree')
   Plug('stevearc/aerial.nvim')
 
   Plug('lewis6991/gitsigns.nvim')
@@ -22,8 +21,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   -- lol literally just a library of random functions
   -- used by telescope
   Plug('nvim-lua/plenary.nvim')
-
-  Plug('meain/vim-jsontogo')
 
   -- Themes
   -- Plug('dracula/vim', { as = 'dracula' })
@@ -35,9 +32,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   -- Plug('ayu-theme/ayu-vim')
   -- Plug('mhartington/oceanic-next')
   Plug('Th3Whit3Wolf/space-nvim')
-
-  -- harpoon navigation
-  Plug('ThePrimeagen/harpoon')
 
   -- dev icons
   Plug('nvim-tree/nvim-web-devicons')
@@ -71,13 +65,9 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
   Plug('benomahony/uv.nvim')
 
-  -- Claude
-  Plug('folke/snacks.nvim')
-
   Plug('nvim-treesitter/nvim-treesitter-context')
 
   Plug('zongben/dbout.nvim')
-  Plug('justinmk/vim-sneak')
 
   Plug('vim-test/vim-test')
 vim.call('plug#end')
