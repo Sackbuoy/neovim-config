@@ -20,6 +20,11 @@ local keybinds = {
     cmd = ":Telescope lsp_references<CR>",
     opts = { noremap = true, silent = true }
   },
+  ["<leader>d"] = {
+    mode = "n",
+    cmd = ":Telescope diagnostics<CR>",
+    opts = {noremap=true, silent=true},
+  },
   ["K"] = {
     mode = "n",
     cmd = "<cmd>lua vim.lsp.buf.hover()<CR>",
