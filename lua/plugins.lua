@@ -69,7 +69,12 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 
   Plug('zongben/dbout.nvim')
 
-  Plug('vim-test/vim-test')
+  Plug('gh-tui-tools/gh-review.nvim')
+  Plug('harrisoncramer/gitlab.nvim')
+  Plug('MunifTanjim/nui.nvim')
+  Plug('dlyongemallo/diffview-plus.nvim')
+  Plug('stevearc/dressing.nvim')
+  Plug('nvim-tree/nvim-web-devicons')
 vim.call('plug#end')
 
 require('plugins-config.treesitter')
@@ -87,6 +92,8 @@ require('Comment').setup()
 require('aerial').setup()
 require('bigfile').setup()
 require('dbout').setup()
+
+require('gitlab').setup()
 
 require('gsm-secrets').setup()
 require('uv').setup()
