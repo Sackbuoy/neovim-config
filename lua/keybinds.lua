@@ -1,4 +1,12 @@
 local keybinds = {
+  ["<leader>r"] = {
+    mode = "n",
+    cmd = function()
+      vim.cmd("source " .. vim.fn.stdpath("config") .. "/init.lua")
+      print("Config reloaded!")
+    end,
+    opts = {noremap=true},
+  },
   -- LSP stuff
   ["gD"] = {
     mode = "n",

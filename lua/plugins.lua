@@ -22,16 +22,16 @@ Plug('lewis6991/gitsigns.nvim')
 -- used by telescope
 Plug('nvim-lua/plenary.nvim')
 
--- Themes
--- Plug('dracula/vim', { as = 'dracula' })
--- Plug('folke/tokyonight.nvim', { branch = 'main', as = 'tokyonight' })
--- Plug('gruvbox-community/gruvbox')
--- Plug('whatyouhide/vim-gotham')
--- Plug('arcticicestudio/nord-vim')
--- Plug('cocopon/iceberg.vim')
--- Plug('ayu-theme/ayu-vim')
--- Plug('mhartington/oceanic-next')
-Plug('Th3Whit3Wolf/space-nvim')
+  -- Themes
+  -- Plug('dracula/vim', { as = 'dracula' })
+  -- Plug('folke/tokyonight.nvim', { branch = 'main', as = 'tokyonight' })
+  -- Plug('gruvbox-community/gruvbox')
+  -- Plug('whatyouhide/vim-gotham')
+  -- Plug('arcticicestudio/nord-vim')
+  -- Plug('cocopon/iceberg.vim')
+  -- Plug('ayu-theme/ayu-vim')
+  -- Plug('mhartington/oceanic-next')
+  Plug('Th3Whit3Wolf/space-nvim')
 
 -- dev icons
 Plug('nvim-tree/nvim-web-devicons')
@@ -67,7 +67,11 @@ Plug('benomahony/uv.nvim')
 
 Plug('nvim-treesitter/nvim-treesitter-context')
 
+
 Plug('nvim-tree/nvim-web-devicons')
+
+Plug('vim-test/vim-test')
+
 vim.call('plug#end')
 
 require('plugins-config.treesitter')

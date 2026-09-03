@@ -51,7 +51,7 @@ opt.completeopt = "menu,menuone,noselect"
 -- set leader
 g.mapleader = ' '
 
-cmd.colorscheme('space-nvim')
+cmd.colorscheme('dracula')
 
 require('keybinds')
 require('lsp')

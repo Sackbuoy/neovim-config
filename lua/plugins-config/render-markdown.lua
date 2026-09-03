@@ -1,21 +1,52 @@
 require('render-markdown').setup({
-    render_modes = { 'n', 'c' },
+  render_modes = { 'n', 'c' },
+  completions = {
+    lsp = {
+      enabled = true,
+    },
+  },
 
-    -- Minimal headings: inline icons, no backgrounds
-    heading = {
-        position = 'inline',
+  code = {
+    width = 'block',
+    left_pad = 2,
+    right_pad = 4,
+  },
+
+  heading = {
+        enabled = true,
+        render_modes = false,
+        atx = true,
+        setext = true,
         sign = true,
         icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
+        position = 'overlay',
+        signs = { '󰫎 ' },
         width = 'full',
+        left_margin = 0,
+        left_pad = 0,
+        right_pad = 0,
+        min_width = 0,
         border = false,
-        backgrounds = {}
+        border_virtual = false,
+        border_prefix = false,
+        above = '▄',
+        below = '▀',
+        backgrounds = {
+            'RenderMarkdownH1Bg',
+            'RenderMarkdownH2Bg',
+            'RenderMarkdownH3Bg',
+            'RenderMarkdownH4Bg',
+            'RenderMarkdownH5Bg',
+            'RenderMarkdownH6Bg',
+        },
+        foregrounds = {
+            'RenderMarkdownH1',
+            'RenderMarkdownH2',
+            'RenderMarkdownH3',
+            'RenderMarkdownH4',
+            'RenderMarkdownH5',
+            'RenderMarkdownH6',
+        },
+        custom = {},
     },
-
-    -- Subtle code blocks: language info only
-    code = {
-        style = 'language',
-        sign = false,
-        left_pad = 1,
-        right_pad = 1
-    }
 })
