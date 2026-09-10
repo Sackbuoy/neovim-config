@@ -54,5 +54,7 @@ g.mapleader = ' '
 
 cmd.colorscheme('space-nvim')
 
+vim.opt.runtimepath:prepend("/home/sackbuoy/Dev/goofin/reviewer-nvim")
+
 require('keybinds')
 require('lsp')
