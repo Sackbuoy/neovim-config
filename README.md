@@ -12,7 +12,7 @@ and run the nix installer:
 NIXPKGS_ALLOW_UNFREE=1 nix profile install . --impure
 ```
 
-Then once you have vim-plug and you can run nvim, run
+Then once you have vim-plug and you can run nvim, run pluginstall:
 ```
 :PlugInstall
 ```
