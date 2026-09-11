@@ -28,7 +28,7 @@
 
       pinnedPkgs = {
         gci = pkgs.buildGoModule.override {go = pkgs-23-11.go_1_21;} rec {
-          pname = "gci";
+          pname = "pinned-gci";
           version = "0.13.6";
 
           src = pkgs.fetchFromGitHub {
