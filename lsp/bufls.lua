@@ -4,6 +4,6 @@ return {
   root_markers = {
     "buf.yaml",
     "buf.work.yaml",
-    ".git",
-  },
+    ".git"
+  }
 }

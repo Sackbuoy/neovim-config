@@ -109,7 +109,8 @@
         pkgs.bash-language-server
 
         # Lua
-        pkgs.lua-language-server
+        pkgs.emmylua-ls
+        pkgs.emmylua-formatter
 
         # Helm
         pkgs.helm-ls
@@ -126,6 +127,8 @@
 
         # Haskell
         pkgs.haskell-language-server
+        pkgs.ghc
+        pkgs.cabal-install
 
         # Zig
         zls.packages.${system}.zls

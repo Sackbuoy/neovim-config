@@ -3,21 +3,21 @@ return {
   filetypes = { "nix" },
   root_markers = {
     "flake.nix",
-    ".git",
+    ".git"
   },
   settings = {
     nixd = {
       formatting = {
-        command = { "alejandra" },
-      },
-    },
+        command = { "alejandra" }
+      }
+    }
   },
-  on_attach = function(client, bufnr)
+  on_attach = function (client, bufnr)
     vim.api.nvim_create_autocmd("BufWritePre", {
       buffer = bufnr,
-      callback = function()
+      callback = function ()
         vim.lsp.buf.format({ async = false })
-      end,
+      end
     })
-  end,
+  end
 }

@@ -7,6 +7,6 @@ return {
     "setup.cfg",
     "requirements.txt",
     "Pipfile",
-    "pyrightconfig.json",
-  },
+    "pyrightconfig.json"
+  }
 }

@@ -6,6 +6,6 @@ return {
     "setup.py",
     "setup.cfg",
     "pytest.ini",
-    ".git",
+    ".git"
   }
 }

@@ -1,4 +1,4 @@
--- In this file I set all the global options, define functions, 
+-- In this file I set all the global options, define functions,
 -- and configure the per-plugin options.
 -- keybinds at the bottom
 require('plugins')
@@ -24,11 +24,10 @@ opt.tabstop = 2
 opt.softtabstop = 2
 opt.expandtab = true
 
-api.nvim_create_user_command("Tabs",
-  function()
-    vim.o.list = not vim.o.list
-    opt.listchars = { tab = '>-' }
-  end, {}
+api.nvim_create_user_command("Tabs", function ()
+  vim.o.list = not vim.o.list
+  opt.listchars = { tab = '>-' }
+end, {}
 )
 
 -- other stuff idk how to categorize
@@ -37,7 +36,7 @@ opt.incsearch = false
 
 -- scrolling
 opt.scrolloff = 12
-opt.ttyfast  = true-- speed up scrolling
+opt.ttyfast = true -- speed up scrolling
 opt.mouse = '' -- dumb that i have to set it to empty string
 
 -- visuals/colors
@@ -47,14 +46,12 @@ opt.termguicolors = true -- some themes need this
 
 -- idk honestly
 opt.hidden = true -- keep buffers open
-opt.completeopt="menu,menuone,noselect"
+opt.completeopt = "menu,menuone,noselect"
 
 -- set leader
 g.mapleader = ' '
 
 cmd.colorscheme('space-nvim')
-
-vim.opt.runtimepath:prepend("/home/sackbuoy/Dev/goofin/reviewer-nvim")
 
 require('keybinds')
 require('lsp')

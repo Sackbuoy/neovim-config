@@ -9,6 +9,6 @@ require('oil').setup({
     ["<C-k>"] = "<cmd>lua require('smart-splits').move_cursor_up()<CR>",
     ["g."] = { "actions.toggle_hidden", mode = "n" },
     ["<leader>s"] = { "actions.select", opts = { vertical = true } },
-    ["<leader>h"] = { "actions.select", opts = { horizontal = true } },
-  },
+    ["<leader>h"] = { "actions.select", opts = { horizontal = true } }
+  }
 })

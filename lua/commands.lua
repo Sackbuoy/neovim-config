@@ -1,5 +1,5 @@
 -- LSP management
-vim.api.nvim_create_user_command('LspRestart', function()
+vim.api.nvim_create_user_command('LspRestart', function ()
   local clients = vim.lsp.get_clients()
   if #clients == 0 then
     print("No active LSP clients")
@@ -9,9 +9,10 @@ vim.api.nvim_create_user_command('LspRestart', function()
     vim.lsp.stop_client(client)
   end
   vim.cmd('edit')
-end, {})
+end, {}
+)
 
-vim.api.nvim_create_user_command('LspClients', function()
+vim.api.nvim_create_user_command('LspClients', function ()
   local clients = vim.lsp.get_clients()
   if #clients == 0 then
     print("No active LSP clients")
@@ -20,4 +21,5 @@ vim.api.nvim_create_user_command('LspClients', function()
   for _, client in ipairs(clients) do
     print(client.name)
   end
-end, {})
+end, {}
+)
