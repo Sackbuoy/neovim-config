@@ -51,7 +51,7 @@ opt.completeopt = "menu,menuone,noselect"
 -- set leader
 g.mapleader = ' '
 
-cmd.colorscheme('dracula')
+cmd.colorscheme('tokyonight')
 
 require('keybinds')
 require('lsp')

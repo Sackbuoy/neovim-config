@@ -4,73 +4,73 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.config/nvim/plugged')
 
-Plug('numToStr/Comment.nvim')
-
-Plug('nvim-telescope/telescope.nvim')
-Plug('nvim-telescope/telescope-frecency.nvim')
-
--- 'for' and 'do' are keywords so i gotta do this fuckery
-Plug('nvim-treesitter/nvim-treesitter', { branch = 'main', ['do'] = ':TSUpdate' })
-
-Plug('f-person/git-blame.nvim')
-Plug('stevearc/aerial.nvim')
-
-Plug('lewis6991/gitsigns.nvim')
-
--- This is for lazy loading plugins? ngl idk
--- lol literally just a library of random functions
--- used by telescope
-Plug('nvim-lua/plenary.nvim')
+  Plug('numToStr/Comment.nvim')
+  
+  Plug('nvim-telescope/telescope.nvim')
+  Plug('nvim-telescope/telescope-frecency.nvim')
+  
+  -- 'for' and 'do' are keywords so i gotta do this fuckery
+  Plug('nvim-treesitter/nvim-treesitter', { branch = 'main', ['do'] = ':TSUpdate' })
+  
+  Plug('f-person/git-blame.nvim')
+  Plug('stevearc/aerial.nvim')
+  
+  Plug('lewis6991/gitsigns.nvim')
+  
+  -- This is for lazy loading plugins? ngl idk
+  -- lol literally just a library of random functions
+  -- used by telescope
+  Plug('nvim-lua/plenary.nvim')
 
   -- Themes
   -- Plug('dracula/vim', { as = 'dracula' })
-  -- Plug('folke/tokyonight.nvim', { branch = 'main', as = 'tokyonight' })
+  Plug('folke/tokyonight.nvim', { branch = 'main', as = 'tokyonight' })
   -- Plug('gruvbox-community/gruvbox')
   -- Plug('whatyouhide/vim-gotham')
   -- Plug('arcticicestudio/nord-vim')
   -- Plug('cocopon/iceberg.vim')
   -- Plug('ayu-theme/ayu-vim')
   -- Plug('mhartington/oceanic-next')
-  Plug('Th3Whit3Wolf/space-nvim')
+  -- Plug('Th3Whit3Wolf/space-nvim')
 
--- dev icons
-Plug('nvim-tree/nvim-web-devicons')
-
-Plug('j-hui/fidget.nvim', { tag = 'legacy' })
-
-Plug('Sackbuoy/git_browse.nvim')
-
--- signature help
-Plug('ray-x/lsp_signature.nvim')
-
--- Completions
-Plug('hrsh7th/cmp-nvim-lsp')
-Plug('hrsh7th/cmp-buffer')
-Plug('hrsh7th/cmp-path')
-Plug('hrsh7th/cmp-cmdline')
-Plug('hrsh7th/nvim-cmp')
-
-Plug('mrjones2014/smart-splits.nvim')
-
-Plug('MeanderingProgrammer/render-markdown.nvim')
-
--- Handling large files
-Plug('LunarVim/bigfile.nvim')
-
-Plug('stevearc/oil.nvim')
-
--- my stuff hehe
-Plug('Sackbuoy/gsm-secrets')
-Plug('Sackbuoy/goto-caller.nvim')
-
-Plug('benomahony/uv.nvim')
-
-Plug('nvim-treesitter/nvim-treesitter-context')
-
-
-Plug('nvim-tree/nvim-web-devicons')
-
-Plug('vim-test/vim-test')
+  -- dev icons
+  Plug('nvim-tree/nvim-web-devicons')
+  
+  Plug('j-hui/fidget.nvim', { tag = 'legacy' })
+  
+  Plug('Sackbuoy/git_browse.nvim')
+  
+  -- signature help
+  Plug('ray-x/lsp_signature.nvim')
+  
+  -- Completions
+  Plug('hrsh7th/cmp-nvim-lsp')
+  Plug('hrsh7th/cmp-buffer')
+  Plug('hrsh7th/cmp-path')
+  Plug('hrsh7th/cmp-cmdline')
+  Plug('hrsh7th/nvim-cmp')
+  
+  Plug('mrjones2014/smart-splits.nvim')
+  
+  Plug('MeanderingProgrammer/render-markdown.nvim')
+  
+  -- Handling large files
+  Plug('LunarVim/bigfile.nvim')
+  
+  Plug('stevearc/oil.nvim')
+  
+  -- my stuff hehe
+  Plug('Sackbuoy/gsm-secrets')
+  Plug('Sackbuoy/goto-caller.nvim')
+  
+  Plug('benomahony/uv.nvim')
+  
+  Plug('nvim-treesitter/nvim-treesitter-context')
+  
+  
+  Plug('nvim-tree/nvim-web-devicons')
+  
+  Plug('vim-test/vim-test')
 
 vim.call('plug#end')
 
