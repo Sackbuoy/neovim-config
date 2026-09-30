@@ -1,7 +1,3 @@
-function _G._note_complete()
-  return vim.trim(vim.fn.system("note list"))
-end
-
 local keybinds = {
   -- LSP stuff
   ["gD"] = {
@@ -89,33 +85,6 @@ local keybinds = {
     cmd = "<cmd>lua vim.diagnostic.setloclist()<CR>",
     opts = { noremap = true, silent = true }
   },
-  ["<leader>U"] = {
-    mode = "n",
-    cmd = ":UndotreeToggle<CR>",
-    opts = { noremap = true, silent = true }
-  },
-
-  -- Harpoon
-  ["<leader>hl"] = {
-    mode = "n",
-    cmd = "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>",
-    opts = { noremap = true, silent = true }
-  },
-  ["<leader>ha"] = {
-    mode = "n",
-    cmd = "<cmd>lua require('harpoon.mark').add_file()<CR>",
-    opts = { noremap = true, silent = true }
-  },
-  ["<leader>o"] = {
-    mode = "n",
-    cmd = "<cmd>lua require('harpoon.ui').nav_prev()<CR>",
-    opts = { noremap = true, silent = true }
-  },
-  ["<leader>i"] = {
-    mode = "n",
-    cmd = "<cmd>lua require('harpoon.ui').nav_next()<CR>",
-    opts = { noremap = true, silent = true }
-  },
 
   -- Open Remote in browser
   ["<leader>G"] = {
@@ -154,76 +123,6 @@ local keybinds = {
     cmd = "<gv",
     opts = { noremap = true }
   },
-  --
-  -- -- Smart Splits stuff
-  -- ["<C-h>"] = {
-  --   mode = "n",
-  --   cmd = ":SmartCursorMoveLeft",
-  -- },
-  -- ["<C-l>"] = {
-  --   mode = "n",
-  --   cmd = ":SmartCursorMoveRight",
-  -- },
-  -- ["<C-j>"] = {
-  --   mode = "n",
-  --   cmd = ":SmartCursorMoveDown",
-  -- },
-  -- ["<C-k>"] = {
-  --   mode = "n",
-  --   cmd = ":SmartCursorMoveUp",
-  -- },
-  ["ex"] = {
-    mode = "n",
-    cmd = ":!%:p<CR>",
-    opts = { noremap = true }
-  },
-  ["<leader>C"] = {
-    mode = { "n", "t" },
-    cmd = function ()
-      require('snacks').terminal.toggle(
-        nil,
-        {
-          cwd = vim.fn.getcwd(),
-          win = {
-            position = "float",
-            width = 0.7,
-            height = 0.7
-          }
-        }
-      )
-    end,
-    opts = { noremap = true, silent = true, desc = "Toggle floating terminal" }
-  },
-  ["<leader>N"] = {
-    mode = { "n", "t" },
-    cmd = function ()
-      local snacks = require('snacks')
-      local on_close = function ()
-        -- When we toggle, we set this flag so on_close knows not to clear
-        if not vim.g._note_toggling then
-          vim.g._note_term_cmd = nil
-        end
-      end
-      local win_opts = { position = "float", width = 0.7, height = 0.7, on_close = on_close }
-      -- If a note terminal is already open, toggle it
-      if vim.g._note_term_cmd then
-        vim.g._note_toggling = true
-        snacks.terminal.toggle(vim.g._note_term_cmd, { win = win_opts })
-        vim.g._note_toggling = false
-        return
-      end
-      -- Otherwise prompt for a note name
-      vim.ui.input({ prompt = "Note: ", completion = "custom,v:lua._note_complete" }, function (name)
-        name = name and vim.trim(name)
-        if name and name ~= "" then
-          local cmd = "note " .. vim.fn.shellescape(name)
-          vim.g._note_term_cmd = cmd
-          snacks.terminal.toggle(cmd, { win = win_opts })
-        end
-      end)
-    end,
-    opts = { noremap = true, silent = true, desc = "Open a note" }
-  },
   ["<leader>so"] = {
     mode = { "n" },
     cmd = require("goto-caller").goto_caller,
@@ -239,6 +138,68 @@ local keybinds = {
     mode = { "n" },
     cmd = ":TestFile<CR>",
     opts = { noremap = true, silent = true }
+  },
+
+  -- reviewer-nvim
+  ["<leader>rs"] = {
+    mode = "n",
+    cmd = ":ReviewSelect<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: select review" }
+  },
+  ["<leader>rd"] = {
+    mode = "n",
+    cmd = ":ReviewDescription<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: go to description" }
+  },
+  ["<leader>rfs"] = {
+    mode = "n",
+    cmd = ":ReviewFileSelect<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: select file" }
+  },
+  ["<leader>rfn"] = {
+    mode = "n",
+    cmd = ":ReviewFileNext<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: next file" }
+  },
+  ["<leader>rfp"] = {
+    mode = "n",
+    cmd = ":ReviewFilePrev<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: prev file" }
+  },
+  ["<leader>rft"] = {
+    mode = "n",
+    cmd = ":ReviewFileTargetVsplit<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: open target-branch file" }
+  },
+  ["<leader>rds"] = {
+    mode = "n",
+    cmd = ":ReviewDiscussionSelect<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: select discussion" }
+  },
+  ["<leader>rdo"] = {
+    mode = "n",
+    cmd = ":ReviewDiscussionOpen<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: open discussion at cursor" }
+  },
+  ["<leader>rdn"] = {
+    mode = "n",
+    cmd = ":ReviewDiscussionNext<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: next discussion" }
+  },
+  ["<leader>rdp"] = {
+    mode = "n",
+    cmd = ":ReviewDiscussionPrev<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: prev discussion" }
+  },
+  ["<leader>ra"] = {
+    mode = "n",
+    cmd = ":ReviewApprove<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: approve" }
+  },
+  ["<leader>rx"] = {
+    mode = "n",
+    cmd = ":ReviewSubmit<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: submit reply/comment" }
   }
 }
 

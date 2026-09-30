@@ -67,12 +67,6 @@ Plug('benomahony/uv.nvim')
 
 Plug('nvim-treesitter/nvim-treesitter-context')
 
-Plug('zongben/dbout.nvim')
-
-Plug('gh-tui-tools/gh-review.nvim')
-Plug('MunifTanjim/nui.nvim')
-Plug('dlyongemallo/diffview-plus.nvim')
-Plug('stevearc/dressing.nvim')
 Plug('nvim-tree/nvim-web-devicons')
 vim.call('plug#end')
 
@@ -91,7 +85,6 @@ require('lsp_signature').setup()
 require('Comment').setup()
 require('aerial').setup()
 require('bigfile').setup()
-require('dbout').setup()
 
 require('gsm-secrets').setup()
 require('uv').setup()
