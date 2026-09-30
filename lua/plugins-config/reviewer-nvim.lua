@@ -1,4 +1,4 @@
-vim.opt.runtimepath:prepend("/Users/cameronkientz/Dev/goofin/reviewer-nvim")
+vim.opt.runtimepath:prepend("~/Dev/goofin/reviewer-nvim")
 require('reviewer-nvim').setup({
   enabled              = true,
   picker               = "telescope",
