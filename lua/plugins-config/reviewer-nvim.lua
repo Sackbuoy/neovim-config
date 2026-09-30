@@ -1,4 +1,4 @@
-vim.opt.runtimepath:prepend("/home/sackbuoy/Dev/goofin/reviewer-nvim")
+vim.opt.runtimepath:prepend("/Users/cameronkientz/Dev/goofin/reviewer-nvim")
 require('reviewer-nvim').setup({
   enabled              = true,
   picker               = "telescope",
@@ -15,15 +15,3 @@ require('reviewer-nvim').setup({
     deletion_sign_hl = { link = "DiffDelete" }
   }
 })
-
--- vim.keymap.set("n", "<leader>rs", "<cmd>:ReviewSelect<CR>", { noremap = false, silent = false })
-
--- local keybinds = {
---
--- local set_keybinds = function (keys)
---   for key, item in pairs(keys) do
---     vim.keymap.set(item.mode, key, item.cmd, item.opts)
---   end
--- end
-
--- set_keybinds(keybinds)
