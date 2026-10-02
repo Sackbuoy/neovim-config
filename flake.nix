@@ -99,8 +99,8 @@
         pkgs.terraform-ls
 
         # TypeScript/JavaScript
+        # NOTE: nodejs comes from profiles (web.nix), not bundled here to avoid conflicts
         pkgs.typescript-language-server
-        pkgs.nodejs_22
 
         # Angular
         pkgs.angular-language-server
@@ -127,16 +127,14 @@
 
         # Haskell
         pkgs.haskell-language-server
-        pkgs.ghc
-        pkgs.cabal-install
+        # NOTE: ghc and cabal-install come from profiles (haskell.nix)
 
         # Zig
         zls.packages.${system}.zls
 
         # Tools
-        pkgs.ripgrep
-        pkgs.fd
-        pkgs.git
+        # NOTE: fd and ripgrep come from profiles (cli.nix) to avoid profile collisions
+        # If using nvim without profiles installed, add them back here
         pinnedPkgs.tree-sitter
       ];
     in {
