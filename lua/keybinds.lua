@@ -1,11 +1,11 @@
 local keybinds = {
   ["<leader>r"] = {
     mode = "n",
-    cmd = function()
+    cmd = function ()
       vim.cmd("source " .. vim.fn.stdpath("config") .. "/init.lua")
       print("Config reloaded!")
     end,
-    opts = {noremap=true},
+    opts = { noremap = true }
   },
   -- LSP stuff
   ["gD"] = {
@@ -31,7 +31,7 @@ local keybinds = {
   ["<leader>d"] = {
     mode = "n",
     cmd = ":Telescope diagnostics<CR>",
-    opts = {noremap=true, silent=true},
+    opts = { noremap = true, silent = true }
   },
   ["K"] = {
     mode = "n",
@@ -202,6 +202,21 @@ local keybinds = {
   ["<leader>rdp"] = {
     mode = "n",
     cmd = ":ReviewDiscussionPrev<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: prev discussion" }
+  },
+  ["<leader>rcs"] = {
+    mode = "n",
+    cmd = ":ReviewChangeSelect<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: open discussion at cursor" }
+  },
+  ["<leader>rcn"] = {
+    mode = "n",
+    cmd = ":ReviewChangeNext<CR>",
+    opts = { noremap = true, silent = true, desc = "Review: next discussion" }
+  },
+  ["<leader>rcp"] = {
+    mode = "n",
+    cmd = ":ReviewChangePrev<CR>",
     opts = { noremap = true, silent = true, desc = "Review: prev discussion" }
   },
   ["<leader>ra"] = {
