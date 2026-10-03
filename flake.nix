@@ -87,8 +87,8 @@
         pkgs.gcc
 
         # Rust
-        pkgs.rust-analyzer
-        pkgs.rustfmt
+        # NOTE: rust-analyzer and rustfmt live in profiles/rust.nix alongside rustc/cargo
+        # to avoid ABI mismatches — they must come from the same pkgs instance
 
         # Python
         pkgs.basedpyright
@@ -126,8 +126,8 @@
         pkgs.buf
 
         # Haskell
-        pkgs.haskell-language-server
-        # NOTE: ghc and cabal-install come from profiles (haskell.nix)
+        # NOTE: haskell-language-server, ghc, cabal-install all live in profiles/haskell.nix
+        # HLS is compiled against a specific GHC ABI — they MUST come from the same pkgs instance
 
         # Zig
         zls.packages.${system}.zls
