@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-26-05.url = "github:NixOS/nixpkgs/nixos-26.05";
     zls.url = "github:zigtools/zls";
   };
@@ -11,6 +12,7 @@
     self,
     nixpkgs,
     nixpkgs-26-05,
+    nixpkgs-unstable,
     zls,
   }: let
     systems = ["x86_64-linux" "aarch64-darwin"];
@@ -25,9 +27,10 @@
     packages = forEachSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
       pkgs-26-05 = nixpkgs-26-05.legacyPackages.${system};
+      pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
 
       myBinaries = [
-        pkgs.neovim
+        pkgs-unstable.neovim
 
         # Go
         pkgs.gopls
