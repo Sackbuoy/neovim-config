@@ -80,7 +80,7 @@
         pkgs.nixd
 
         # Protobuf
-        pkgs.buf
+        pkgs-unstable.buf
 
         # Haskell
         # NOTE: haskell-language-server, ghc, cabal-install all live in profiles/haskell.nix
