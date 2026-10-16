@@ -10,6 +10,21 @@ return {
   init_options = {
     command = { "golangci-lint", "run", "--output.json.path", "stdout", "--show-stats=false" }
   },
+  handlers = {
+    -- Strip the "Unnecessary" tag (tag 1) so nvim doesn't dim the referenced code
+    -- (e.g. embedlit hints). The diagnostic message itself is kept.
+    ["textDocument/publishDiagnostics"] = function (err, result, ctx)
+      if result and result.diagnostics then
+        for _, d in ipairs(result.diagnostics) do
+          if d.tags then
+            d.tags = vim.tbl_filter(function (t) return t ~= 1 end, d.tags)
+            if #d.tags == 0 then d.tags = nil end
+          end
+        end
+      end
+      return vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
+    end,
+  },
   on_attach = function (client, bufnr)
     vim.o.autoread = true
     local root = client.config.root_dir

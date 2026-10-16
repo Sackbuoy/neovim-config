@@ -33,12 +33,12 @@
         pkgs-unstable.neovim
 
         # Go
-        pkgs.gopls
-        pkgs.golangci-lint-langserver
-        pkgs.gotools
-        pkgs.gci # 0.13.6 ships in nixos-25.05 natively
-        pkgs.golangci-lint
-        pkgs.gofumpt
+        pkgs-unstable.gopls
+        pkgs-unstable.golangci-lint-langserver
+        pkgs-unstable.gotools
+        pkgs-unstable.gci # 0.13.6 ships in nixos-25.05 natively
+        pkgs-unstable.golangci-lint
+        pkgs-unstable.gofumpt
 
         # C compiler (for treesitter parser compilation)
         pkgs.gcc
@@ -88,6 +88,8 @@
 
         # Zig
         zls.packages.${system}.zls
+
+        pkgs-26-05.cue
 
         # Tools
         # NOTE: fd and ripgrep come from profiles (cli.nix) to avoid profile collisions

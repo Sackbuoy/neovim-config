@@ -228,7 +228,7 @@ local keybinds = {
     mode = "n",
     cmd = ":ReviewSubmit<CR>",
     opts = { noremap = true, silent = true, desc = "Review: submit reply/comment" }
-  }
+  },
 }
 
 local set_keybinds = function (keys)

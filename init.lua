@@ -53,5 +53,12 @@ g.mapleader = ' '
 
 cmd.colorscheme('tokyonight')
 
+-- Don't dim code flagged with the LSP "Unnecessary" diagnostic tag
+local function clear_unnecessary_hl()
+  vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", {})
+end
+clear_unnecessary_hl()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = clear_unnecessary_hl })
+
 require('keybinds')
 require('lsp')

@@ -71,7 +71,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
   Plug('nvim-tree/nvim-web-devicons')
   
   Plug('vim-test/vim-test')
-
 vim.call('plug#end')
 
 require('plugins-config.treesitter')
